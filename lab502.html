@@ -5,7 +5,7 @@
 <style>
 .shadowbox {
   font-family: Copperplate, Papyrus, fantasy;
-  font-size:14px
+  font-size:px
   border: 1px solid #333;
   box-shadow: 8px 8px 5px #444;
   padding: 8px 12px;
@@ -16,12 +16,54 @@
   font-family: Copperplate, Papyrus, fantasy;
   text-align: center;
 } 
+.container {
+  position: relative;
+  width: 50%;
+}
 
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #008CBA;
+}
+
+.container:hover .overlay {
+  opacity: 1;
+}
+
+.text {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
 </style>
+</head>
  
 <body>  
  <div class="shadowbox">
-   <h1 id="size">"Size, gunslinger… size."</h1>
+   <div class="container">
+   <img src ="https://shop.suntup.press/cdn/shop/products/dt-pbk2_1024x1024.jpg?v=1501596550" alt="Suntup.com The Dark Tower Series Paperback Covers I - Fine Art Print" class="image">
+  <div class="overlay">
+    <div class="text">Size, gunslinger… size</div>
+  </div>
+</div>  
 
 <p>"The greatest mystery the universe offers is not life but size. Size encompasses life, and the Tower encompasses size. The child, who is most at home with wonder, says: Daddy, what is above the sky? And the father says: The darkness of space. The child: What is beyond space? The father: The galaxy. The child: Beyond the galaxy? The father: Another galaxy. The child: Beyond the other galaxies? The father: No one knows.</p> 
 
@@ -36,5 +78,7 @@
 <p>Think how small such a concept of things make us, gunslinger! If a God watches over it all, does He actually mete out justice for such a race of gnats? Does His eye see the sparrow fall when the sparrow is less than a speck of hydrogen floating disconnected in the depth of space? And if He does see… what must the nature of such a God be? Where does He live? How is it possible to live beyond infinity?</p>
 
 <p>Imagine the sand of the Mohaine Desert, which you crossed to find me, and imagine a trillion universes - not worlds by universes - encapsulated in each grain of that desert; and within each universe an infinity of others. We tower over these universes from our pitiful grass vantage point; with one swing of your boot you may knock a billion billion worlds flying off into darkness, a chain never to be completed."</p>
+
+<p>"Size, gunslinger… size."</p>
  </div>
 <!DOCTYPE
