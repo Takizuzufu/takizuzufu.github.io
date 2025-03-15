@@ -3,19 +3,11 @@
 <head>
 <title>Lab503</title>
 <style>
-  .float-container {
-    border: 3px solid #fff;
-    padding: 20px;
-}
-.float-child {
-    font-size:18px;
-    font-family: Copperplate, Papyrus, fantasy;
-    background-color: oldlace;
-    width: 50%;
-    float: left;
-    padding: 10px;
-    border: 1px solid;
-}  
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+} 
 .text1 {
   font-size:24px
   border: 1px solid;
@@ -133,23 +125,22 @@
  
 </body>
 <body>
-  <div class="float-container">
-  <div class="float-child">
-    <h3><a href="https://stephenking.com/darktower/">The Dark Tower Series</a></h3>
- <ul>
-  <li>The Dark Tower 1 - The Gunslinger</li>
-  <li>The Dark Tower 2 - The Drawing of the Three </li>
-  <li>The Dark Tower 3 - The Wastelands</li>
-  <li>The Dark Tower 4 - Wizard and Glass</li>
-  <li>The Dark Tower - The Wind Through the Keyhole</li>
-  <li>The Dark Tower 5 - Wolves of the Calla</li>
-  <li>The Dark Tower 6 - Song of Susannah</li>
-  <li>The Dark Tower 7 - The Dark Tower </li>
-</ul> 
-  </div>
-  
-  <div class="float-child">
-      <table>
+  <div class="grid-container">
+    <div class="grid-child oldlace">
+        <h3><a href="https://stephenking.com/darktower/">The Dark Tower Series</a></h3>
+        <ul>
+          <li>The Dark Tower 1 - The Gunslinger</li>
+          <li>The Dark Tower 2 - The Drawing of the Three </li>
+          <li>The Dark Tower 3 - The Wastelands</li>
+          <li>The Dark Tower 4 - Wizard and Glass</li>
+          <li>The Dark Tower - The Wind Through the Keyhole</li>
+          <li>The Dark Tower 5 - Wolves of the Calla</li>
+          <li>The Dark Tower 6 - Song of Susannah</li>
+          <li>The Dark Tower 7 - The Dark Tower </li>
+        </ul> 
+    </div>
+    <div class="grid-child oldlace">
+         <table>
   <tr>
     <th>Character Name</th>
     <th>Book Appearances</th>
@@ -179,12 +170,14 @@
     <td>1-7</td>
   </tr>
 </table> 
-  </div>
+    </div>  
+</div>
+
+
   <div id="figure2">
    <img src="DarkTower_2ndgrpTM_1024x1024.png" alt="Dark Tower Series Art Book Covers II"width=100% height="auto">  
     <p><a href="https://shop.suntup.press/products/the-dark-tower-series-paperback-covers-ii-fine-art-print">Image from https://shop.suntup.press/products/the-dark-tower-series-paperback-covers-ii-fine-art-print</a></p>
 </div>
-
 </body>
 </html>
 
