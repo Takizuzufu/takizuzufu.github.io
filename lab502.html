@@ -11,11 +11,66 @@
   padding: 8px 12px;
   background-image: linear-gradient(180deg, #fff, #ddd 40%, #ccc);
 }
+  .container {
+  position: relative;
+  width: 50%;
+}
+
+.image {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%)
+}
+
+.container:hover .image {
+  opacity: 0.3;
+}
+
+.container:hover .middle {
+  opacity: 1;
+}
+
+.text {
+  background-color: #4CAF50;
+  color: white;
+  font-size: 16px;
+  padding: 16px 32px;
+}
 </style>
 </head>
+
+
+
+
+<div class="container">
+  <img src="img_avatar.png" alt="Avatar" class="image" style="width:100%">
+  <div class="middle">
+    <div class="text">John Doe</div>
+  </div>
+</div>
+
  
 <body>  
-<img src="DarkTower1_TM_1024x1024.png" alt="Dark Tower Series Art Book Covers" width=100% height=auto> 
+  <div class="container">
+ <img src="DarkTower1_TM_1024x1024.png" alt="Dark Tower Series Art Book Covers" width=100% height=50%> 
+  <div class="middle">
+    <div class="text">Picture taken from https://shop.suntup.press/products/the-dark-tower-series-paperback-covers-i-fine-art-print</div>
+  </div>
+</div>
+
 <div class="shadowbox">
   
 <p>"The greatest mystery the universe offers is not life but size. Size encompasses life, and the Tower encompasses size. The child, who is most at home with wonder, says: Daddy, what is above the sky? And the father says: The darkness of space. The child: What is beyond space? The father: The galaxy. The child: Beyond the galaxy? The father: Another galaxy. The child: Beyond the other galaxies? The father: No one knows.</p> 
