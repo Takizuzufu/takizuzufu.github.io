@@ -6,29 +6,36 @@
 body{
     background-image: radial-gradient( red , yellow);
   }
-.tarot{
-    color: blue; 
-    font:"Brush Script MT", cursive; 
-    background-color:oldlace;
+.flex-container {
+    display: flex;
 }
-.arcana{
-  color: red;
-  font:"Brush Script MT";
-  background-color:blue; 
-}
-  
-</style>
-</head>
-  
+.flex-child {
+    flex: 1;
+    border: 2px solid yellow;
+}  
+.flex-child:first-child {
+    margin-right: 20px;
+} 
 <body>
-  <div class="tarot">
-    <h1>This is a header</h1>
-    <p>This is a sentence</p>    
+<div class="flex-container">
+  <div class="flex-child magenta">
+     <ul>
+              <li>The Dark Tower 1 - The Gunslinger</li>
+              <li>The Dark Tower 2 - The Drawing of the Three </li>
+              <li>The Dark Tower 3 - The Wastelands</li>
+              <li>The Dark Tower 4 - Wizard and Glass</li>
+              <li>The Dark Tower - The Wind Through the Keyhole</li>
   </div>
- <div class="arcana">
-    <h2>This is another header</h2>
-    <p>This is another sentence</p>
+  
+  <div class="flex-child green">
+    <li>The Dark Tower 5 - Wolves of the Calla</li>
+              <li>The Dark Tower 6 - Song of Susannah</li>
+              <li>The Dark Tower 7 - The Dark Tower </li>
+            </ul> 
   </div>
+  
+</div>
+
 </body>
 </html>
 <!DOCTYPE
