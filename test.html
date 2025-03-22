@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html> 
 <head>
-<title>58</title>
+<title>59</title>
 <style> 
 #div1{
 	display: none;
@@ -74,15 +74,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>    
 <script>
     $(document).ready(function(){
-      $("#button").click(function() {
-        console.log("Toggle text button clicked");
+      $("#button").click(function(){
+	console.log("Toggle text button clicked");
         $("#div1").fadeIn(1000, "linear");
-      });
-	console.log("started JavaScript");
-      // do this when click on the clicktoreveal1 button
-      $("#div2").click(function() {
-	   console.log("Clicked second button");
-        $("#button2").text("https://stephenking.com/darktower/");
+      });	
+      $("#div2").click(function(){
+	console.log("Clicked second button");
+	$("#button2").html("https://stephenking.com/darktower/");
       });
     });    
 </script>
