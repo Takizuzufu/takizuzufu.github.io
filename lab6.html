@@ -5,132 +5,105 @@
 <style> 
 #div1{
 	display: none;
-	font-family: Copperplate, Papyrus, fantasy;
-	font-size:18px;
 }
-#div2{
-	display: none;
-	font-family: Copperplate, Papyrus, fantasy;
-	font-size:18px;
-}
-#figure1 {
-	text-align: center;
-	font-size: 12px;
-	text-indent: 0;
-	border: thin silver solid;
-	margin: 0.5em;
-	padding: 0.5em;
+#figure1{
+  	text-align: center;
+ 	font-size: 12px;
+  	text-indent: 0;
+  	border: thin silver solid;
+  	margin: 0.5em;
+  	padding: 0.5em;
 }
 #figure2{
-	text-align: center;
-	font-size: 12px;
-	text-indent: 0;
-	border: thin silver solid;
-	margin: 0.5em;
-	padding: 0.5em;
+  	text-align: center;
+  	font-size: 12px;
+  	text-indent: 0;
+  	border: thin silver solid;
+ 	margin: 0.5em;
+  	padding: 0.5em;
 }
-#figure3{
-	text-align: center;
-	font-size: 12px;
-	text-indent: 0;
-	border: thin silver solid;
-	margin: 0.5em;
-	padding: 0.5em;
-}
-.text1 {
-  font-size:24px
-  border: 1px solid;
-  padding: 10px;
-  box-shadow: 5px 5px 8px black, 10px 10px 8px grey;
-  margin: 20px;
-  background-color: oldlace;
-  position: relative;
-  right: 30px;
- opacity: 0.9;
- }
-#text4 {
-  font-family: "Times New Roman", Times, serif;
-  font-size:30px
-  border: 1px solid;
-  padding: 10px;
-  box-shadow: 5px 5px 8px black, 10px 10px 8px grey;
-  margin: 20px;
-  background-color: oldlace;
-  position: relative;
-  right: 30px;
-    opacity: 0.9;
+.text1{
+	font-family: Copperplate, Papyrus, fantasy;
+  	font-size:24px;
+ 	border: 1px solid;
+ 	padding: 10px;
+  	box-shadow: 5px 5px 8px black, 10px 10px 8px grey;
+  	margin: 20px;
+ 	background-color: oldlace;
+ 	position: relative;
+  	right: 30px;
+ 	opacity: 0.9;
  }
 .text2{
-  font-size:24px
-  border: 1px solid;
-  padding: 10px;
-  box-shadow: -5px 5px 8px black, -10px 10px 8px grey;
-  margin: 20px;
-  background-color: oldlace;
-  position: relative;
-  left: 30px;
-    opacity: 0.9;
+	font-family: Copperplate, Papyrus, fantasy;
+  	font-size:24px;
+ 	border: 1px solid;
+ 	padding: 10px;
+  	box-shadow: -5px 5px 8px black, -10px 10px 8px grey;
+  	margin: 20px;
+  	background-color: oldlace;
+  	position: relative;
+  	left: 30px;
+   	opacity: 0.9;
 }
 #text3{
-  font-size:30px;
-  border: 1px solid;
-  padding: 10px;
-  box-shadow: -5px 5px 8px black, -10px 10px 8px grey;
-  margin: 20px;
-  background-color: oldlace;
-  position: relative;
-  left: 30px;
-    opacity: 0.9;
+	font-family: Copperplate, Papyrus, fantasy;
+  	font-size:30px;
+ 	border: 1px solid;
+  	padding: 10px;
+  	box-shadow: -5px 5px 8px black, -10px 10px 8px grey;
+  	margin: 20px;
+  	background-color: oldlace;
+  	position: relative;
+  	left: 30px;
+    	opacity: 0.9;
 }
-#id1{
-font-family: Copperplate, Papyrus, fantasy;
-font-size:18px;
-}
-#id2{
-font-family: Copperplate, Papyrus, fantasy;
-font-size:18px; 
-}
+#text4{
+  	font-family: "Times New Roman", Times, serif;
+  	font-size:30px;
+  	border: 1px solid;
+  	padding: 10px;
+  	box-shadow: 5px 5px 8px black, 10px 10px 8px grey;
+ 	margin: 20px;
+  	background-color: oldlace;
+  	position: relative;
+  	right: 30px;
+    	opacity: 0.9;
+ }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>    
 <script>
-     $(document).ready(function(){ 
-        $("button1").click(function(){ 
-            console.log("someone clicked on button1.");
-             $("#div1").fadeIn();
-        });
-  });
+    $(document).ready(function(){
+      $("#button").click(function(){
+	console.log("Toggle text button clicked");
+        $("#div1").fadeIn(1000, "linear");
+      });	
+      $("#div2").click(function(){
+	console.log("Clicked second button");
+	$("#button2").html("https://stephenking.com/darktower/");
+      });
+    });    
 </script>
- 
 </head>
- 
-    <body>  
- 
 
-        <div id="figure1">
- 
+<body>
+<div id="figure1">
+	<img src="DarkTower1_TM_1024x1024.png" alt="Dark Tower Series Art Book Covers" width=100% height="auto"> 
+ 	<p><a href=" https://shop.suntup.press/products/the-dark-tower-series-paperback-covers-i-fine-art-print">Image from https://shop.suntup.press/products/the-dark-tower-series-paperback-covers-i-fine-art-print</a></p>
+</div>
+<button id="button">Reveal Text</button>
+<div id="div1">
+	<div class="text1">
+        	<p>"The greatest mystery the universe offers is not life but size. Size encompasses life, and the Tower encompasses size. The child, who is most at home with wonder, says: Daddy, what is above the sky? And the father says: The darkness of space. The child: What is beyond space? The father: The galaxy. The child: Beyond the galaxy? The father: Another galaxy. The child: Beyond the other galaxies? The father: No one knows.</p> 
+    	</div>
 
-          <img src="DarkTower1_TM_1024x1024.png" alt="Dark Tower Series Art Book Covers" width=100% height="auto"> 
- 
+    	<div class ="text2">
+      		<p>You see? Size defeats us. For the fish, the lake in which he lives is the universe. What does the fish think when he is jerked up by the mouth through the silver limits of existence and into a new universe where the air drowns him and the light is blue madness? Where huge bipeds with no gills stuff it into a suffocating box and cover it with wet weeds to die?</p>
+    	</div>
 
-          <p><a href=" https://shop.suntup.press/products/the-dark-tower-series-paperback-covers-i-fine-art-print">Image from https://shop.suntup.press/products/the-dark-tower-series-paperback-covers-i-fine-art-print</a></p>
- 
-
-        </div>
- 
-        <p><button type="button1">Click to Reveal</button> </p>
- 	<div id="div1">
-        <div id="id1">
-       <div class="text1">
-        <p>"The greatest mystery the universe offers is not life but size. Size encompasses life, and the Tower encompasses size. The child, who is most at home with wonder, says: Daddy, what is above the sky? And the father says: The darkness of space. The child: What is beyond space? The father: The galaxy. The child: Beyond the galaxy? The father: Another galaxy. The child: Beyond the other galaxies? The father: No one knows.</p> 
-    </div>
-
-    <div class ="text2">
-      <p>You see? Size defeats us. For the fish, the lake in which he lives is the universe. What does the fish think when he is jerked up by the mouth through the silver limits of existence and into a new universe where the air drowns him and the light is blue madness? Where huge bipeds with no gills stuff it into a suffocating box and cover it with wet weeds to die?</p>
-    </div>
-
-    <div class="text1">
-      <p>Or one might take the tip of the pencil and magnify it. One reaches the point where a stunning realization strikes home: The pencil tip is not solid; it is composed of atoms which whirl and revolve like a trillion demon planets. What seems solid to us is actually only a loose net held together by gravity. Viewed at their actual size, the distances between these atoms might become league, gulfs, aeons. The atoms themselves are composed of nuclei and revolving protons and electrons. One may step down further to subatomic particles. And then to what? Tachyons? Nothing? Of course not. Everything in the universe denies nothing; to suggest an ending is the one absurdity. </p>
-    </div>
+    	<div class="text1">
+      		<p>Or one might take the tip of the pencil and magnify it. One reaches the point where a stunning realization strikes home: The pencil tip is not solid; it is composed of atoms which whirl and revolve like a trillion demon planets. What seems solid to us is actually only a loose net held together by gravity. Viewed at their actual size, the distances between these atoms might become league, gulfs, aeons. The atoms themselves are composed of nuclei and revolving protons and electrons. One may step down further to subatomic particles. And then to what? Tachyons? Nothing? Of course not. Everything in the universe denies nothing; to suggest an ending is the one absurdity. </p>
+    	</div>
 
     <div class ="text2">
       <p>If you fell outward to the limit of the universe, would you find a board fence and signs reading DEAD END? No. You might find something hard and rounded, as the chick must see the egg from the inside. And if you should peck through the shell (or find a door), what great and torrential light might shine through your opening at the end of space? Might you look through and discover our entire universe is but part of one atom on a blade of grass? Might you be forced to think that by burning a twig you incinerate an eternity of eternities? That existence rises not to one infinite but to an infinity of them?</p>
@@ -153,45 +126,12 @@ font-size:18px;
     </div>
       <div id ="text4">
       <p><b>-The Man In Black, The Dark Tower Book 1 - The Gunslinger</b></p>
-      </div>  
-	<div id="figure3">
-      <p>><img src="https://beyondhogwarts.com/wp-content/uploads/2024/04/1200px-man-in-black-with-roland-by-fire-beyond-mountains.png" alt="Roland and the Man in Black" width=100% height="auto"><</p>
-		<p><a href="https://beyondhogwarts.com/wp-content/uploads/2024/04/1200px-man-in-black-with-roland-by-fire-beyond-mountains.png"> Image from https://beyondhogwarts.com/wp-content/uploads/2024/04/1200px-man-in-black-with-roland-by-fire-beyond-mountains.png</a></p>
-	</div>
-	<div id="hidden_text">
-		<p>Click Here for More information</p>
-	</div>
-	<div id="id2">
-		<div id="div2">
-		<h3><a href="https://stephenking.com/darktower/">The Dark Tower Series</a></h3>
-            <ul>
-              <li>The Dark Tower 1 - The Gunslinger</li>
-              <li>The Dark Tower 2 - The Drawing of the Three </li>
-              <li>The Dark Tower 3 - The Wastelands</li>
-              <li>The Dark Tower 4 - Wizard and Glass</li>
-              <li>The Dark Tower - The Wind Through the Keyhole</li>
-              <li>The Dark Tower 5 - Wolves of the Calla</li>
-              <li>The Dark Tower 6 - Song of Susannah</li>
-              <li>The Dark Tower 7 - The Dark Tower </li>
-            </ul> 
-        </div>
-     </div> 
-    
-    </div>  
-	</div>
- 
-
-        <div id="figure2">
- 
-
-           <img src="DarkTower_2ndgrpTM_1024x1024.png" alt="Dark Tower Series Art Book Covers II"width=100% height="auto">  
- 
-
-            <p><a href="https://shop.suntup.press/products/the-dark-tower-series-paperback-covers-ii-fine-art-print">Image from https://shop.suntup.press/products/the-dark-tower-series-paperback-covers-ii-fine-art-print</a></p>
- 
-
-        </div>
- 
-    </body>
- 
+      </div>
+</div>
+<div id="figure2">
+	<img src="DarkTower_2ndgrpTM_1024x1024.png" alt="Dark Tower Series Art Book Covers II"width=100% height="auto">  
+	<p><a href="https://shop.suntup.press/products/the-dark-tower-series-paperback-covers-ii-fine-art-print">Image from https://shop.suntup.press/products/the-dark-tower-series-paperback-covers-ii-fine-art-print</a></p>
+</div>
+<div id="div2"><button id="button2">For more information</button></div>
+</body>
 </html>
