@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>23</title>
+<title>25</title>
 <style>
 .grid-container {
     display: grid;
@@ -78,21 +78,19 @@
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>    
 <script>
-    $(document).ready(function(){
-        $("button1").click(function(){
-            console.log("Button 1 was clicked");
-            $("#div1").fadeIn();
+ $(document).ready(function(){
+	$("button1").click(function(){
+		console.log("Button 1 was clicked");
+		$("#div1").fadeIn();
 	});
 	$("button2").click(function(){
-            console.log("Button 2 was clicked");
-	   	 $("#appear").click( function() {
-
+		console.log("Button 2 was clicked");
+		$("#appear").click( function() {
 		console.log("someone clicked on button appear.");
 			$("#hidden_text").text("Live Long and Prosper.");
-		 	});
 		});
 	});
-
+});
 </script>
 </head>
     <body>  
