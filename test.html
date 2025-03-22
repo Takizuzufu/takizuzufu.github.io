@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>14</title>
+<title>15</title>
 <style>
     #div1{
         display: none;
@@ -52,6 +52,18 @@
          margin: 0.5em;
          padding: 0.5em;
     }
+	#text4{
+ 	 font-family: "Times New Roman", Times, serif;
+ 	 font-size:30px
+ 	 border: 1px solid;
+  	padding: 10px;
+ 	 box-shadow: 5px 5px 8px black, 10px 10px 8px grey;
+  	margin: 20px;
+  	background-color: oldlace;
+  	position: relative;
+  	right: 30px;
+   	 opacity: 0.9;
+ }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>    
 <script>
@@ -59,9 +71,13 @@
         $("button").click(function(){
             console.log("someone clicked on button1.");
             $("#div1").fadeToggle();
+	
          });
-        $("#appear").click( function(){
-	       $("#hidden_text").text("For more information ");
+	$("button2").click(function(){
+            console.log("someone clicked on button1.");
+     		$("#appear").click(function(){
+	       		$("#hidden_text").text("https://stephenking.com/darktower/");
+		});
 	});
     });
 </script>
@@ -71,7 +87,7 @@
           <img src="DarkTower1_TM_1024x1024.png" alt="Dark Tower Series Art Book Covers" width=100% height="auto"> 
           <p><a href=" https://shop.suntup.press/products/the-dark-tower-series-paperback-covers-i-fine-art-print">Image from https://shop.suntup.press/products/the-dark-tower-series-paperback-covers-i-fine-art-print</a></p>
         </div>
-        <p><button type="button">???</button> </p>
+        <p><button type="button">Click to Reveal</button> </p>
         <div id="div1">
             <div class="text1">
                <p>"The greatest mystery the universe offers is not life but size. Size encompasses life, and the Tower encompasses size. The child, who is most at home with wonder, says: Daddy, what is above the sky? And the father says: The darkness of space. The child: What is beyond space? The father: The galaxy. The child: Beyond the galaxy? The father: Another galaxy. The child: Beyond the other galaxies? The father: No one knows.</p> 
@@ -95,6 +111,12 @@
                 <p>Imagine the sand of the Mohaine Desert, which you crossed to find me, and imagine a trillion universes - not worlds by universes - encapsulated in each grain of that desert; and within each universe an infinity of others. We tower over these universes from our pitiful grass vantage point; with one swing of your boot you may knock a billion billion worlds flying off into darkness, a chain never to be completed."</p>
             </div>
         </div>
+	<div id ="text4">
+      		<p><b>-The Man In Black, The Dark Tower Book 1 - The Gunslinger by Stephen King</b></p>
+      	</div>
+	<div id="hidden_text">
+		<button id="button2">For more information</button>
+	</div>	    
         <div id="figure2">
            <img src="DarkTower_2ndgrpTM_1024x1024.png" alt="Dark Tower Series Art Book Covers II"width=100% height="auto">  
             <p><a href="https://shop.suntup.press/products/the-dark-tower-series-paperback-covers-ii-fine-art-print">Image from https://shop.suntup.press/products/the-dark-tower-series-paperback-covers-ii-fine-art-print</a></p>
