@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html> 
 <head>
-<title>54</title>
+<title>55</title>
 <style> 
 #div1{
 	display: none;
@@ -78,6 +78,13 @@
         console.log("Toggle text button clicked");
         $("#div1").fadeIn(1000, "linear");
       });
+	console.log("started JavaScript");
+      // do this when click on the clicktoreveal1 button
+      $("#clicktoreveal1").click(function() {
+        // run this when I click on this button
+        console.log("clicked on the 1st button");
+        $("#div_ctr1").html("Texas A&amp;M University");
+      });
     });    
 </script>
 </head>
@@ -124,6 +131,7 @@
       <p><b>-The Man In Black, The Dark Tower Book 1 - The Gunslinger</b></p>
       </div>
 </div>
+<div id="div_ctr1"><button id="clicktoreveal1">Click to reveal...</button></div>
 <div id="figure2">
 	<img src="DarkTower_2ndgrpTM_1024x1024.png" alt="Dark Tower Series Art Book Covers II"width=100% height="auto">  
 	<p><a href="https://shop.suntup.press/products/the-dark-tower-series-paperback-covers-ii-fine-art-print">Image from https://shop.suntup.press/products/the-dark-tower-series-paperback-covers-ii-fine-art-print</a></p>
