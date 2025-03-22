@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html> 
 <head>
-<title>41</title>
+<title>42</title>
 <style> 
 #div1{
 	display: none;
@@ -11,11 +11,22 @@
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>    
 <script>
-	$(document).ready(function(){ 
-		$("button1").click(function(){ 
-			$("#div1").fadeIn();
-		});
-	});
+    $(document).ready(function(){
+      console.log("started JavaScript");
+      // do this when click on the clicktoreveal1 button
+      $("#clicktoreveal1").click(function() {
+        // run this when I click on this button
+        console.log("clicked on the 1st button");
+        $("#div_ctr1").html("Texas A&amp;M University");
+      });
+
+      // do this when click on the clicktoreveal2 button
+      $("#clicktoreveal2").click(function() {
+        // run this when I click on this button
+        console.log("clicked on the 2nd button");
+        $("#div_ctr2").html("MSU Denver");
+      });
+    });
 </script>
 </head>
 
@@ -24,9 +35,7 @@
 	<img src="DarkTower1_TM_1024x1024.png" alt="Dark Tower Series Art Book Covers" width=100% height="auto"> 
  	<p><a href=" https://shop.suntup.press/products/the-dark-tower-series-paperback-covers-i-fine-art-print">Image from https://shop.suntup.press/products/the-dark-tower-series-paperback-covers-i-fine-art-print</a></p>
 </div>
-<p><button type="button1">Click to Reveal</button> </p>
-<div id="div1">
-	<p>This is a paragraph</p>
-</div>
+<div id="div_ctr1"><button id="clicktoreveal1">Click to reveal...</button></div>
+<div id="div_ctr2"><button id="clicktoreveal2">Click to reveal...</button></div>
 </body>
 </html>
