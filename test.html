@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>10</title>
+<title>11</title>
 <style>
     #div1{
         display: none;
@@ -42,7 +42,10 @@
         $("button").click(function(){
             console.log("someone clicked on button1.");
             $("#div1").fadeToggle();
-      });
+          });
+        $("#appear").click( function() {
+            $("#hidden_text").text("Live Long and Prosper.");
+        });
     });
 </script>
 </head>
