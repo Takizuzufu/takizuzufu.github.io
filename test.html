@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html> 
 <head>
-<title>55</title>
+<title>56</title>
 <style> 
 #div1{
 	display: none;
@@ -76,14 +76,14 @@
     $(document).ready(function(){
       $("#button").click(function() {
         console.log("Toggle text button clicked");
-        $("#div1").fadeIn(1000, "linear");
+        $("#div1").fadeToggle(1000, "linear");
       });
 	console.log("started JavaScript");
       // do this when click on the clicktoreveal1 button
       $("#clicktoreveal1").click(function() {
         // run this when I click on this button
         console.log("clicked on the 1st button");
-        $("#div_ctr1").html("Texas A&amp;M University");
+        $("#div_ctr1").html(<a href="https://stephenking.com/darktower/" target="_blank">test-link</a>);
       });
     });    
 </script>
