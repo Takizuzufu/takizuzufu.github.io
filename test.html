@@ -19,14 +19,13 @@ function randomWordPicker(aList){
 
 let result = randomWordPicker(theList)
 document.querySelector("h1").innerHTML = result
-console.log(result)
 }
     });    
 </script>
 </head>
 
 <body>
- <button onclick="randomizeFunction()">Randomize!!</button>
+ <button onclick="randomWordPicker(theList)">Randomize!!</button>
   
   <p>Random generated word is:</p>
   <p id="randomWord"></p>
