@@ -1,12 +1,25 @@
-let theList = ["hello", "there", "john", "how", "are", "you", "doing"]
 
+<html>
+  <head>
+    <title>Hangman!</title>
+    <style>
+    <html>
+  <button onclick="randomizeFunction()">Randomize!!</button>
+  
+  <p>Random generated word is:</p>
+  <p id="randomWord"></p>
+</html>
 
-function randomWordPicker(aList){
-    let theListLength = theList.length / 10
-    let theAnswer = Math.floor( ( Math.random( ) * 10 ) * theListLength  ) 
-    return aList[theAnswer]
+<script>
+const myList = ["List item 1", "List item 2", "List item 3", "List item 4", "List item 5"];
+
+randomizeFunction()
+
+function randomizeFunction() {
+    document.getElementById("randomWord").innerHTML = myList[Math.floor(Math.random() * myList.length)]
 }
+</script>
 
-let result = randomWordPicker(theList)
-document.querySelector("h1").innerHTML = result
-console.log(result)
+    </div>
+  </body>
+</html>
