@@ -1,19 +1,25 @@
 <!DOCTYPE html>
 <html> 
 <head>
-<title>project2_1</title>
+<title>project2_2</title>
 <style> 
 
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>    
 <script>
     $(document).ready(function(){
-    const myList = ["List item 1", "List item 2", "List item 3", "List item 4", "List item 5"];
+    let theList = ["hello", "there", "john", "how", "are", "you", "doing"]
 
-    randomizeFunction()
 
-    function randomizeFunction() {
-    document.getElementById("randomWord").innerHTML = myList[Math.floor(Math.random() * myList.length)]
+function randomWordPicker(aList){
+    let theListLength = theList.length / 10
+    let theAnswer = Math.floor( ( Math.random( ) * 10 ) * theListLength  ) 
+    return aList[theAnswer]
+}
+
+let result = randomWordPicker(theList)
+document.querySelector("h1").innerHTML = result
+console.log(result)
 }
     });    
 </script>
