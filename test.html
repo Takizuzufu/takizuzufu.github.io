@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html> 
 <head>
-<title>7</title>
+<title>8</title>
 </head>
 <script>
-    $(document).ready(function() {
-        // Array of random word
+       // Array of random word
         const words = ["apple", "banana", "cherry", "date", "elderberry", "fig", "grape", "honeydew"];
 
         // Function to generate a random word
@@ -13,8 +12,7 @@
             const randomIndex = Math.floor(Math.random() * words.length);
             const randomWord = words[randomIndex];
             document.getElementById('random-word').innerText = randomWord;
-        }
-        
+    $(document).ready(function() {     
         // Declare variables with proper scope
         var word = "random-word"; // Secret word
         var blank = "- - - - - - - - - - - - - - - - - -";  // Initial blank spaces
