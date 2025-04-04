@@ -1,25 +1,29 @@
+<!DOCTYPE html>
+<html> 
+<head>
+<title>project2_1</title>
+<style> 
 
-<html>
-  <head>
-    <title>Hangman!</title>
-    <style>
-    <html>
-  <button onclick="randomizeFunction()">Randomize!!</button>
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>    
+<script>
+    $(document).ready(function(){
+    const myList = ["List item 1", "List item 2", "List item 3", "List item 4", "List item 5"];
+
+    randomizeFunction()
+
+    function randomizeFunction() {
+    document.getElementById("randomWord").innerHTML = myList[Math.floor(Math.random() * myList.length)]
+}
+    });    
+</script>
+</head>
+
+<body>
+ <button onclick="randomizeFunction()">Randomize!!</button>
   
   <p>Random generated word is:</p>
   <p id="randomWord"></p>
-</html>
 
-<script>
-const myList = ["List item 1", "List item 2", "List item 3", "List item 4", "List item 5"];
-
-randomizeFunction()
-
-function randomizeFunction() {
-    document.getElementById("randomWord").innerHTML = myList[Math.floor(Math.random() * myList.length)]
-}
-</script>
-
-    </div>
-  </body>
+</body>
 </html>
