@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html> 
 <head>
-<title>9</title>
+<title>10</title>
 </head>
 <script>
        // Array of random word
@@ -117,19 +117,4 @@
       <span class="letter" id="y">y</span>
       <span class="letter" id="z">z</span>
     </div>
-    <h1>Random Word Generator</h1>
-    <p id="random-word">Click the button to generate a word!</p>
-    <button onclick="generateRandomWord()">Generate Random Word</button>
-
-    <script>
-        // Array of random words
-        const words = ["apple", "banana", "cherry", "date", "elderberry", "fig", "grape", "honeydew"];
-
-        // Function to generate a random word
-        function generateRandomWord() {
-            const randomIndex = Math.floor(Math.random() * words.length);
-            const randomWord = words[randomIndex];
-            document.getElementById('random-word').innerText = randomWord;
-        }
-    </script>
-</html>
+ </html>
