@@ -1,26 +1,23 @@
 <!DOCTYPE html>
 <html> 
 <head>
-<title>5</title>
-<style> 
-
-</style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>    
-<script>
-const myList = ["List item 1", "List item 2", "List item 3", "List item 4", "List item 5"];
-randomizeFunction()
-
-
-function randomizeFunction() {
-    document.getElementById("randomWord").innertext = myList[Math.floor(Math.random() * 5)] 
-}
-</script>
+<title>6</title>
 </head>
-
+    
 <body>
+    <h1>Random Word Generator</h1>
+    <p id="random-word">Click the button to generate a word!</p>
+    <button onclick="generateRandomWord()">Generate Random Word</button>
 
-<p>Random generated word is:</p>
-<p id="randomWord"></p>
+    <script>
+        // Array of random words
+        const words = ["apple", "banana", "cherry", "date", "elderberry", "fig", "grape", "honeydew"];
 
-</body>
+        // Function to generate a random word
+        function generateRandomWord() {
+            const randomIndex = Math.floor(Math.random() * words.length);
+            const randomWord = words[randomIndex];
+            document.getElementById('random-word').innerText = randomWord;
+        }
+    </script>
 </html>
