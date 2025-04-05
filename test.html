@@ -4,6 +4,9 @@
   <head>
     <title>14</title>
     <style>
+      #div1{
+	      display: none;
+      }
       #alphabet { margin: auto;
                   padding: 20px; }
       #word { margin: auto;
@@ -112,6 +115,11 @@
              // 
            
          });
+     $(document).ready(function(){
+      $("#button").click(function(){
+	       $("#div1").fadeIn(1000, "linear");
+      });	
+    }); 
       
     </script>
   </head>
@@ -148,5 +156,11 @@
      <span class="letter" id="y">y</span>
      <span class="letter" id="z">z</span>  
      </div>
+    <div id = "div1>
+      <button id="button">Click here for a hint</button>
+      <div class="text1">
+        	<p>It's a type of root vegetable</p> 
+    	</div>
+    </div>
   </body>
 </html>
