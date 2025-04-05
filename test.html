@@ -1,38 +1,277 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Swap images</title>
-</head>
-<body>
-    <button id="myButton">Swipe</button>
-    <img id="myImg" src="" alt="Image">
-    
+
+<!doctype html>
+<html>
+  <head>
+    <title>Hangman!</title>
+    <style>
+    a{ color: white;
+     background-color:rgb(169, 169, 169, 0.6);
+    width: 250px;
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid white;
+    }
+    p {
+    color: white;
+    background-color: rgb(169, 169, 169, 0.6);
+    padding: 10px
+    }
+      body {
+      background-color:#F8F8FF;
+      }
+      #blank {
+      color: white;
+      }
+      h1 {
+        text-align: center;
+        color: white;
+        background-color: rgb(169, 169, 169, 0.6);
+        width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      #p1 { width: 250px;
+      margin-right: auto;
+      margin-left: auto;
+      font-weight: bold;
+      
+      }
+
+      #alphabet {
+        text-align: center;
+        margin-right: auto;
+        margin-left: auto;
+        padding: 30px;
+      }
+
+      #word {
+        margin: auto;
+        font-size: 2em;
+        font-family: serif;
+        font-weight: bold;
+        padding: 20px;
+        text-align: center;
+        color: rgb(100, 100, 100);
+      }
+
+      #info {
+        padding: 20px;
+        color: rgb(100, 100, 100);
+        background-color: white;
+        text-align: center;
+   width: 200px; 
+   margin-left:auto; 
+   margin-right:auto;
+   border-radius: 0.5em;
+   
+      }
+
+      #guesses {
+        text-align: center;
+        margin: auto;
+        padding: 20px;
+        color: rgb(100, 100, 100);
+        background-color: white;
+        width: 200px;
+      }
+
+      #winner-image {
+        display: none; /* Hide the image by default */
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      #winner-message {
+        text-align: center;
+      font-size: 1.2em;
+        color: white;
+        display: none; /* Hide the message by default */
+        background-color: rgb(169, 169, 169, 0.6);
+        width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 10px;
+        padding:10px;
+      }
+      #buttonstyle{
+      display: block;
+margin-left: auto;
+margin-right: auto;
+border-radius: 10px;
+color: white; 
+background-color: rgb(169, 169, 169, 0.5)
+;
+padding: 5px;
+cursor: pointer;
+border-color: white;
+      }
+      #buttonstyle:hover {
+  background-color: gray; /* Changes background color on hover */
+  color: white; /* Changes text color on hover */
+}
+#hint { text-align: 
+center;
+margin-left: auto;
+margin-right: auto;
+width: 500px;
+
+}
+.letter:hover {
+  background-color: gray; /* Changes background color on hover */
+  color: white; /* Changes text color on hover */
+  }
+  .letter1{
+background-color: white;
+width: 650px;
+margin-left: auto;
+margin-right: auto;
+padding: 5px;
+}
+.letter{
+background-color: rgb(169, 169, 169, 0.6);
+padding: 3.75px;
+color: white;
+cursor: pointer;
+padding: 5px;
+}
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
-        // Here you create your array
-        const images = [
-            'hangman0.jpg',
-            'hangman1.jpg',
-            'hangman2.jpg',
-            // add all images that you want
-        ];
-        const bouton = document.getElementById('myButton');
-        const image = document.getElementById('myImg');
-        let index = 0; 
-        // Instead of using a called function 
-        // I used the new Javascript syntax
-        bouton.addEventListener('click', () => {
-            // you probably will have to adapt the image path 
-            // I used the one that you use on the video
-            image.src='hangman' + images[index];
-            index++;
-            // If you want to restart, set the index to 0
-            // once the array will be passed
-            if (index >= images.length) {
-                index = 0;
+      $(document).ready(function () {
+        const word = "MARINES";
+        let blank = "* * * * * * *"; // Represents the hidden word
+        $("#word").text(blank);
+
+        let triedLetters = "";
+        let tries = 10;
+        $("#guesses").text("Guesses left: " + tries);
+
+        let gameWon = false;
+        let gameLost = false;
+
+        $(".letter").click(function () {
+          if (!gameWon && !gameLost) {
+            $("#info").text("");
+
+            const letter = $(this).text();
+
+            // Apply fade-out and fade-in effect
+            $(this).fadeOut(1000, function () {
+               // Optional: Restore the letter visibly
+            });
+
+            if (triedLetters.includes(letter)) {
+              $("#info").text("Letter " + letter + " already tried.");
+            } else if (!word.includes(letter)) {
+              tries--;
+              $("#guesses").text("Mistakes left: " + tries);
+
+              if (tries < 1) {
+                gameLost = true;
+                $("#info").text("You couldn't figure out the best military branch!");
+              }
+            } else {
+              let newBlank = blank.split(" ");
+              for (let i = 0; i < word.length; i++) {
+                if (word[i] === letter) {
+                  newBlank[i] = letter;
+                }
+              }
+              blank = newBlank.join(" ");
+              $("#word").text(blank);
+
+              if (!blank.includes("*")) {
+                gameWon = true;
+                $("#info").text("Semper Fi!");
+                // Show the winner image and message
+                $("#winner-image").show();
+                $("#winner-message").show();
+              }
             }
+
+            triedLetters += letter;
+          }
         });
+      });
     </script>
-</body>
+    <script>
+  $(document).ready(function () {
+  $("#buttonstyle").click(function () {
+    // Check if the paragraph already exists
+    if ($("#hint").length === 0) {
+      // If it doesn't exist, create and append it
+      $("<p id='hint'>This military branch was born in Philadelphia, Pennsylvania, at Tun Tavern November 10th 1775.</p>")
+        .hide() // Initially hides the paragraph
+        .appendTo("body"); // Appends it to the <body> or any specific container
+    }
+    // Toggles visibility of the paragraph
+    $("#hint").fadeToggle(1000); // Fades in/out dynamically
+  });
+});
+
+
+    </script>
+  </head>
+  <body>
+    <h1>Figure Out The Best U.S. Military Branch!</h1>
+    <br>
+ 
+    
+    <div id="guesses"></div>
+    <br>
+    <div id="info"></div>
+    <br>
+    <div id="word"></div>
+      <p id="p1">Click a letter below to make a guess!</p>
+      <div id="alphabet">
+     <br>
+      <div class="letter1">
+      <span class="letter" id="a">A</span>
+      <span class="letter" id="b">B</span>
+      <span class="letter" id="c">C</span>
+      <span class="letter" id="d">D</span>
+      <span class="letter" id="e">E</span>
+      <span class="letter" id="f">F</span>
+      <span class="letter" id="g">G</span>
+      <span class="letter" id="h">H</span>
+      <span class="letter" id="i">I</span>
+      <span class="letter" id="j">J</span>
+      <span class="letter" id="k">K</span>
+      <span class="letter" id="l">L</span>
+      <span class="letter" id="m">M</span>
+      <span class="letter" id="n">N</span>
+      <span class="letter" id="o">O</span>
+      <span class="letter" id="p">P</span>
+      <span class="letter" id="q">Q</span>
+      <span class="letter" id="r">R</span>
+      <span class="letter" id="s">S</span>
+      <span class="letter" id="t">T</span>
+      <span class="letter" id="u">U</span>
+      <span class="letter" id="v">V</span>
+      <span class="letter" id="w">W</span>
+      <span class="letter" id="x">X</span>
+      <span class="letter" id="y">Y</span>
+      <span class="letter" id="z">Z</span>
+    </div>
+    </div>
+    <br>
+    <div id="winner-message">You've figured out the best military branch: MARINES!</div>
+    <br>
+     <br>
+    <div id="winner-image">
+     
+    <img src="https://th.bing.com/th/id/R.7f9da073208ab4877f03c025e13ae574?rik=onTcmlsmAq3PBQ&riu=http%3a%2f%2fwallsdesk.com%2fwp-content%2fuploads%2f2017%2f01%2fMarine-Corps-HD-Background-.jpg&ehk=Afla1S1AD0%2baNp39JZ7rhG93fVsRNbCSk39Ovab7ah8%3d&risl=&pid=ImgRaw&r=0" 
+      alt="Marine Corps" style="width: 100%; max-width: 600px; border-radius: 20px;" />
+      <br>
+      <br>
+      <a href="https://wallsdesk.com/marine-corps-84595/" target="_blank">
+      Click here to view the picture website!
+  </a>
+
+    </div>
+    <br>
+    <br>
+    <button id="buttonstyle">Click to reveal or unreveal a hint</button>
+    <br>
+  </body>
 </html>
