@@ -76,7 +76,7 @@
             else if (!word.includes(letter)) {
               // Reduce the number of remaining tries
               tries -= 1;
-              $("#guesses").text("Number of Guesses Left: " + tries);
+              $("#guesses").text("Guesses Left: " + tries);
 
               // If out of tries, the player loses
               if (tries < 1) {
