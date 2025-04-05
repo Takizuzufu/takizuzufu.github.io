@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>14</title>
+    <title>15</title>
   </head>
   <body>
     <div id="arrayImages"></div>
   </body>
   <script>
     // Array of image file names
-    const images = ["1.png", "2.png", "3.png"];
+    const images = ["hangman0.jpg", "hangman1.jpg", "hangman2.jpg"];
     // Reference to the container for the images
     const arrayImagesElement = document.getElementById("arrayImages");
 
@@ -22,8 +22,10 @@
       const img = new Image();
 
       // when png images 1,2,3 exist on your machine/server, uncomment img.src = fileName;
-      img.src = "https://i.giphy.com/media/QAsBwSjx9zVKoGp9nr/giphy.gif";
-      img.alt = "A gif of Keanu Reeves";
+      img.src = "hangman0.jpg";
+      img.src = "hangman1.jpg";
+      img.src = "hangman2.jpg";
+    
 
       // img.src = fileName;
       // img.alt = altText;
