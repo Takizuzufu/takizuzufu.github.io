@@ -1,44 +1,38 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>16</title>
-  </head>
-  <body>
-    <div id="arrayImages"></div>
-  </body>
-  <script>
-    // Array of image file names
-    const images = ["1.png", "2.jpg", "3.jpg"];
-    // Reference to the container for the images
-    const arrayImagesElement = document.getElementById("arrayImages");
-
-    // Function that creates HTMLImageElement instance
-    function createImageNode(fileName, atlText) {
-      // Learn more about the image element
-      // https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/Image
-      // https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement
-      const img = new Image();
-
-      // when png images 1,2,3 exist on your machine/server, uncomment img.src = fileName;
-      img.src = "hangman0.jpg";
-      img.src = "hangman1.jpg";
-      img.src = "hangman2.jpg";
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swap images</title>
+</head>
+<body>
+    <button id="myButton">Swipe</button>
+    <img id="myImg" src="" alt="Image">
     
-
-      // img.src = fileName;
-      // img.alt = altText;
-
-      return img;
-    }
-
-    images.forEach(img => {
-      // For each file name in the 'images' array, create and append a new
-      // image node to the end of the list of children of <div id="arrayImages"></div>
-      // https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild
-      arrayImagesElement.appendChild(createImageNode(img));
-    });
-  </script>
+    <script>
+        // Here you create your array
+        const images = [
+            'hangman0.jpg',
+            'hangman1.jpg',
+            'hangman2.jpg',
+            // add all images that you want
+        ];
+        const bouton = document.getElementById('myButton');
+        const image = document.getElementById('myImg');
+        let index = 0; 
+        // Instead of using a called function 
+        // I used the new Javascript syntax
+        bouton.addEventListener('click', () => {
+            // you probably will have to adapt the image path 
+            // I used the one that you use on the video
+            image.src='img/' + images[index];
+            index++;
+            // If you want to restart, set the index to 0
+            // once the array will be passed
+            if (index >= images.length) {
+                index = 0;
+            }
+        });
+    </script>
+</body>
 </html>
-
