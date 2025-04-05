@@ -7,6 +7,9 @@
       h1{
         text-align: center;
       }
+      p{
+        text-align: center;
+      }
       #alphabet {
         font-family: "Times New Roman", Times, serif;
         margin: auto;
@@ -26,7 +29,7 @@
       #info { 
         padding: 20px; 
         font-color: red;
-        background-color: yellow; 
+        background-color: thistle; 
         font-family: "Times New Roman", Times, serif;
         margin: auto;
         text-align: center;
@@ -40,7 +43,7 @@
       $(document).ready(function() {
         // Declare variables with proper scope
         var word = "r u t a b a g a";  // Secret word
-        var blank = "- - - - - -  - - - -";  // Initial blank spaces
+        var blank = "_ _ _ _ _ _ _ _";  // Initial blank spaces
         $("#word").text(blank);
 
         var triedLetters = "";  // List of tried letters
@@ -65,7 +68,7 @@
 
             // Check if the letter was already guessed
             if (triedLetters.includes(letter)) {
-              $("#info").text("Yikes! Letter " + letter + " already tried. Womp womp.");
+              $("#info").text(letter + " already tried.");
             }
             // If the letter isn't in the word, reduce tries and check for game over
             else if (!word.includes(letter)) {
@@ -76,7 +79,8 @@
               // If out of tries, the player loses
               if (tries < 1) {
                 gameLost = true;
-                $("#info").text("Hey everyone, LOOK! This sucker LOST. Better luck next time dingdong.");
+                $('#hangman7.jpg').show()
+                $("#info").text("YOU LOSE");
               }
             }
             // If the letter is in the word, update the display
@@ -95,7 +99,7 @@
               // Check if the player has won
               if (!blank.includes("-")) {
                 gameWon = true;
-                $("#info").text("Wow! Wow! Wow! You won Hangman! Amazing, just amazing. Have you called your friends and family yet to tell the news?? I know I have. Everyone is elated.");
+                $("#info").text("YOU WIN");
               }
             }
 
