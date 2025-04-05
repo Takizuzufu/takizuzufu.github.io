@@ -2,258 +2,151 @@
 <!doctype html>
 <html>
   <head>
-    <title>Hangman!</title>
+    <title>Fallout Hangman!</title>
     <style>
-      h1 {
-        text-align: center;
-        color: white;
-        background-color: rgb(169, 169, 169, 0.6);
-        width: 500px;
-        margin-left: auto;
-        margin-right: auto;
-      }
-      #p1 { width: 250px;
-      margin-right: auto;
-      margin-left: auto;
-      font-weight: bold;
-      
-      }
-
-      #alphabet {
-        text-align: center;
-        margin-right: auto;
-        margin-left: auto;
-        padding: 30px;
-      }
-
-      #word {
-        margin: auto;
-        font-size: 2em;
-        font-family: serif;
-        font-weight: bold;
-        padding: 20px;
-        text-align: center;
-        color: rgb(100, 100, 100);
-      }
-
-      #info {
-        padding: 20px;
-        color: rgb(100, 100, 100);
-        background-color: white;
-        text-align: center;
-   width: 200px; 
-   margin-left:auto; 
-   margin-right:auto;
-   border-radius: 0.5em;
-   
-      }
-
-      #guesses {
-        text-align: center;
-        margin: auto;
-        padding: 20px;
-        color: rgb(100, 100, 100);
-        background-color: white;
-        width: 200px;
-      }
-
-      #winner-image {
-        display: none; /* Hide the image by default */
-        text-align: center;
-        margin-top: 20px;
-      }
-
-      #winner-message {
-        text-align: center;
-      font-size: 1.2em;
-        color: white;
-        display: none; /* Hide the message by default */
-        background-color: rgb(169, 169, 169, 0.6);
-        width: 500px;
-        margin-left: auto;
-        margin-right: auto;
-        border-radius: 10px;
-        padding:10px;
-      }
-      #buttonstyle{
-      display: block;
-margin-left: auto;
-margin-right: auto;
-border-radius: 10px;
-color: white; 
-background-color: rgb(169, 169, 169, 0.5)
-;
-padding: 5px;
-cursor: pointer;
-border-color: white;
-      }
-      #buttonstyle:hover {
-  background-color: gray; /* Changes background color on hover */
-  color: white; /* Changes text color on hover */
-}
-#hint { text-align: 
-center;
-margin-left: auto;
-margin-right: auto;
-width: 500px;
-
-}
-.letter:hover {
-  background-color: gray; /* Changes background color on hover */
-  color: white; /* Changes text color on hover */
-  }
-  .letter1{
-background-color: white;
-width: 650px;
-margin-left: auto;
-margin-right: auto;
-padding: 5px;
-}
-.letter{
-background-color: rgb(169, 169, 169, 0.6);
-padding: 3.75px;
-color: white;
-cursor: pointer;
-padding: 5px;
-}
+      #alphabet { margin: auto;
+                  padding: 20px; }
+      #word { margin: auto;
+              font: 400em serif bold;
+              padding: 20px;
+            }
+      #info { padding: 20px; 
+              font-color: red;
+              background-color: yellow; 
+            }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
-      $(document).ready(function () {
-        const word = "R U T A B A G A";
-        let blank = "_ _ _ _ _ _ _ _"; // Represents the hidden word
-        $("#word").text(blank);
-
-        let triedLetters = "";
-        let tries = 10;
-        $("#guesses").text("Guesses left: " + tries);
-
-        let gameWon = false;
-        let gameLost = false;
-
-        $(".letter").click(function () {
-          if (!gameWon && !gameLost) {
-            $("#info").text("");
-
-            const letter = $(this).text();
-
-            // Apply fade-out and fade-in effect
-            $(this).fadeOut(1000, function () {
-               // Optional: Restore the letter visibly
-            });
-
-            if (triedLetters.includes(letter)) {
-              $("#info").text("Letter " + letter + " already tried.");
-            } else if (!word.includes(letter)) {
-              tries--;
-              $("#guesses").text("Mistakes left: " + tries);
-
-              if (tries < 1) {
-                gameLost = true;
-                $("#info").text("You couldn't figure out the best military branch!");
-              }
-            } else {
-              let newBlank = blank.split(" ");
-              for (let i = 0; i < word.length; i++) {
-                if (word[i] === letter) {
-                  newBlank[i] = letter;
-                }
-              }
-              blank = newBlank.join(" ");
+         $(document).ready( function() {
+              // this is the secret word!
+              word =  "R U T A B A G A";
+              blank = "- - - - - - - - -";
               $("#word").text(blank);
 
-              if (!blank.includes("*")) {
-                gameWon = true;
-                $("#info").text("Semper Fi!");
-                // Show the winner image and message
-                $("#winner-image").show();
-                $("#winner-message").show();
-              }
-            }
+              // this is the list of letters that have been tried
+              triedLetters = "";
 
-            triedLetters += letter;
-          }
-        });
-      });
-    </script>
-    <script>
-  $(document).ready(function () {
-  $("#buttonstyle").click(function () {
-    // Check if the paragraph already exists
-    if ($("#hint").length === 0) {
-      // If it doesn't exist, create and append it
-      $("<p id='hint'>This military branch was born in Philadelphia, Pennsylvania, at Tun Tavern November 10th 1775.</p>")
-        .hide() // Initially hides the paragraph
-        .appendTo("body"); // Appends it to the <body> or any specific container
-    }
-    // Toggles visibility of the paragraph
-    $("#hint").fadeToggle(1000); // Fades in/out dynamically
-  });
-});
+              // this is the number of tries left
+              tries = 10;
+              $("#guesses").text("Guesses left: "+tries);
+
+              // boolean (true / false variable) to track if game has been won or lost
+              gameWon = false;
+              gameLost = false;
+                   
+              // when a user clicks on a letter... this is where everything happens!
+              $(".letter").click( function() {
+
+                  // check if the game has been won or lost
+                  if (gameWon != true && gameLost != true) {
+                    // erase the info box
+                    $("#info").text("");
+                
+                    // use text to get the letter that was clicked on
+                    letter = $(this).text();
+                    console.log("clicked on: ", letter)
+
+                    // make a line through the letter
+                    $(this).css("text-decoration", "line-through");
+
+                    // if the letter has already been clicked on, 
+                    // let the user know it's already been tried
+                    if (triedLetters.includes(letter)) {
+                      $("#info").text("Letter " + letter + "already tried.");
+
+                    // if the letter isn't in the word, reduce
+                    // the number of tries and check if they lost
+                    } else if (! word.includes(letter)) {
+
+                      // reduce the number of remaining tries by 1
+                       tries = tries - 1;
+                       $("#guesses").text("Mistakes, left: " + tries);
+                      
+
+                      // are they out of tries? then they lost!
+                      if (tries < 1) {
+                       gameLost = true;
+                       $("#info").text("Sorry, you ran out of Guesses. You LOSE!");
+                      }
+                    
+                    
+                    // otherwise, put a line through it and
+                    // add it to the found letters
+                    // and check if the player won or lost
+                    } else {
+
+                      // replace the blanks in the blanks variable 
+                      // with the letter that was clicked on
+                      // replace the blanks with letter in blank
+                      // and replace the letters with blanks in word
+                      while (word.includes(letter)) {
+                        index = word.indexOf(letter);
+                        console.log("index of wors is " + index);
+                        word = word.substring(0, index) + " " + word.substring((index + 1))
+                        blank = blank.substring(0, index) + letter + blank.substring((index + 1))
+                        
+                        $("#word").text(blank);
+                        console.log("word is ", word);
+                        console.log("blank is ", blank);
+                      }
+                      
+                      
+                     
+                      // check if the player has won the game
+                      if (!blank.includes("-")) {
+                        gameWon = true;
+                        $("#info").text("You WON!");
+                      }
 
 
+                    }
+
+                    // add the letter to letters already tried
+                    triedletters = triedletters + letter;
+                    console.log("triedletters is ", triedletters);
+                    console.log("word is" , word);
+
+                  }
+              });
+
+             // 
+           
+         });
+      
     </script>
   </head>
   <body>
-    <h1>Let's play hangman!</h1>
-    <br>
- 
-    
-    <div id="guesses"></div>
-    <br>
-    <div id="info"></div>
-    <br>
-    <div id="word"></div>
-      <p id="p1">Click a letter below to make a guess!</p>
-      <div id="alphabet">
-     <br>
-      <div class="letter1">
-      <span class="letter" id="a">A</span>
-      <span class="letter" id="b">B</span>
-      <span class="letter" id="c">C</span>
-      <span class="letter" id="d">D</span>
-      <span class="letter" id="e">E</span>
-      <span class="letter" id="f">F</span>
-      <span class="letter" id="g">G</span>
-      <span class="letter" id="h">H</span>
-      <span class="letter" id="i">I</span>
-      <span class="letter" id="j">J</span>
-      <span class="letter" id="k">K</span>
-      <span class="letter" id="l">L</span>
-      <span class="letter" id="m">M</span>
-      <span class="letter" id="n">N</span>
-      <span class="letter" id="o">O</span>
-      <span class="letter" id="p">P</span>
-      <span class="letter" id="q">Q</span>
-      <span class="letter" id="r">R</span>
-      <span class="letter" id="s">S</span>
-      <span class="letter" id="t">T</span>
-      <span class="letter" id="u">U</span>
-      <span class="letter" id="v">V</span>
-      <span class="letter" id="w">W</span>
-      <span class="letter" id="x">X</span>
-      <span class="letter" id="y">Y</span>
-      <span class="letter" id="z">Z</span>
-    </div>
-    </div>
-    <br>
-    <div id="winner-message">You've figured out the best military branch: MARINES!</div>
-    <br>
-     <br>
-    <div id="winner-image">
-     
-    <img src="https://th.bing.com/th/id/R.7f9da073208ab4877f03c025e13ae574?rik=onTcmlsmAq3PBQ&riu=http%3a%2f%2fwallsdesk.com%2fwp-content%2fuploads%2f2017%2f01%2fMarine-Corps-HD-Background-.jpg&ehk=Afla1S1AD0%2baNp39JZ7rhG93fVsRNbCSk39Ovab7ah8%3d&risl=&pid=ImgRaw&r=0" 
-      alt="Marine Corps" style="width: 100%; max-width: 600px; border-radius: 20px;" />
-      <br>
-      <br>
-      <a href="https://wallsdesk.com/marine-corps-84595/" target="_blank">
-      Click here to view the picture website!
-  </a>
-
-    </div>
-    <br>
-    <br>
-    <button id="buttonstyle">Click to reveal or unreveal a hint</button>
-    <br>
+     <h1>Let's play Hangman!</h1>
+     <div id="guesses"></div>
+     <div id="info"></div>
+     <div id="word"></div>
+     <div id="alphabet"><p>Click to make a guess! - Hint: This character can be found at the HELIOS One power plant in Fallout: New Vegas for his ...unique qualifications.</p>
+     <span class="letter" id="a">a</span>
+     <span class="letter" id="b">b</span>
+     <span class="letter" id="c">c</span>
+     <span class="letter" id="d">d</span>
+     <span class="letter" id="e">e</span>
+     <span class="letter" id="f">f</span>
+     <span class="letter" id="g">g</span>
+     <span class="letter" id="h">h</span>
+     <span class="letter" id="i">i</span>
+     <span class="letter" id="j">j</span>
+     <span class="letter" id="k">k</span>
+     <span class="letter" id="l">l</span>
+     <span class="letter" id="m">m</span>
+     <span class="letter" id="n">n</span>
+     <span class="letter" id="o">o</span>
+     <span class="letter" id="p">p</span>  
+     <span class="letter" id="q">q</span>
+     <span class="letter" id="r">r</span>
+     <span class="letter" id="s">s</span>
+     <span class="letter" id="t">t</span>
+     <span class="letter" id="u">u</span>
+     <span class="letter" id="v">v</span>
+     <span class="letter" id="w">w</span>  
+     <span class="letter" id="x">x</span>
+     <span class="letter" id="y">y</span>
+     <span class="letter" id="z">z</span>  
+     </div>
   </body>
 </html>
