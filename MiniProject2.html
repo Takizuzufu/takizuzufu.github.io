@@ -70,7 +70,7 @@
 
             // Check if the letter was already guessed
             if (triedLetters.includes(letter)) {
-              $("#info").text(letter + " already tried.");
+              $("#info").text("" + letter + " already tried.");
             }
             // If the letter isn't in the word, reduce tries and check for game over
             else if (!word.includes(letter)) {
@@ -81,7 +81,7 @@
               // If out of tries, the player loses
               if (tries < 1) {
                 gameLost = true;
-                $("yourImageId").show()
+                
                 $("#info").text("YOU LOSE");
               }
             }
