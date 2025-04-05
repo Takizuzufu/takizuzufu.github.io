@@ -1,38 +1,27 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>Test</title>
-<style>
-#myDIV {
-  display: none;
-  width: 100%;
-  padding: 50px 0;
-  text-align: center;
-  background-color: lightblue;
-  margin-top: 20px;
-}
-</style>
+    <title>Page Title</title>
 </head>
+
 <body>
 
-<p>Click the button</p>
-
-<button onclick="myFunction()">Reveal Hint</button>
-
-<div id="myDIV">
-Here is a hint
-</div>
-
-<script>
-function myFunction() {
-  var x = document.getElementById("myDIV");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
-}
-</script>
+    <!-- My Heading -->
+    <h1 id="MyHeading">This is a Heading</h1>
+    <!-- My Button -->
+    <button id="MyButton">Click Me!</button>
 
 </body>
+
 </html>
+
+<script>
+    //Select button by id
+    const MyButton = document.getElementById('MyButton');
+    //Add on click listener for button
+    MyButton.addEventListener('click', function() {
+        //Select (h1) heading by id, and then change it's value to (bananas)
+        document.getElementById('MyHeading').innerText = "bananas"
+    })
+</script>
