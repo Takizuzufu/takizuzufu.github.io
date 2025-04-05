@@ -15,7 +15,7 @@
         margin: auto;
         text-align: center;
         padding: 20px;
-        font-size:20px;
+        font-size:22px;
         font-weight: bold;
       }
       #word { 
@@ -24,7 +24,6 @@
         text-align: center;
         padding: 20px;
         font-size:20px;
-        font-weight: bold;
       }
       #info { 
         padding: 20px; 
@@ -79,7 +78,7 @@
               // If out of tries, the player loses
               if (tries < 1) {
                 gameLost = true;
-                $('#hangman7.jpg').show()
+                $("yourImageId").show()
                 $("#info").text("YOU LOSE");
               }
             }
@@ -115,7 +114,9 @@
   <body>
     <h1>Let's play Hangman!</h1>
     <div id="guesses"></div>
-    <div id="info"></div>
+    <div id="info">
+    <img id="yourImageId" src="hangman7.jpg"/>
+    </div>
     <div id="word"></div>
     <div id="alphabet">
       <p>Click to make a guess!</p>
