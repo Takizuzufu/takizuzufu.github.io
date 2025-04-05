@@ -1,40 +1,37 @@
 <!DOCTYPE html>
-<html> 
+<html>
 <head>
-<title>Lab6</title>
-<style> 
-#div1{
-	display: none;
+<title>Test</title>
+<style>
+#myDIV {
+  width: 100%;
+  padding: 50px 0;
+  text-align: center;
+  background-color: lightblue;
+  margin-top: 20px;
 }
-.text1{
-	font-family: Copperplate, Papyrus, fantasy;
-  	font-size:24px;
- 	border: 1px solid;
- 	padding: 10px;
-  	box-shadow: 5px 5px 8px black, 10px 10px 8px grey;
-  	margin: 20px;
- 	background-color: oldlace;
- 	position: relative;
-  	right: 30px;
- 	opacity: 0.9;
- }
 </style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>    
-<script>
-    $(document).ready(function(){
-      $("#button").click(function(){
-        $("#div1").fadeIn(1000, "linear");
-    });    
-</script>
 </head>
-
 <body>
-<button id="button">Reveal Text</button>
-<div id="div1">
-	<div class="text1">
-        	<p>"The greatest mystery the universe offers is not life but size. Size encompasses life, and the Tower encompasses size. The child, who is most at home with wonder, says: Daddy, what is above the sky? And the father says: The darkness of space. The child: What is beyond space? The father: The galaxy. The child: Beyond the galaxy? The father: Another galaxy. The child: Beyond the other galaxies? The father: No one knows.</p> 
-    	</div>
+
+<p>Click the button</p>
+
+<button onclick="myFunction()">Reveal Hint</button>
+
+<div id="myDIV">
+Here is a hint
 </div>
+
+<script>
+function myFunction() {
+  var x = document.getElementById("myDIV");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
 
 </body>
 </html>
