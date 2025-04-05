@@ -82,7 +82,7 @@
               if (tries < 1) {
                 gameLost = true;
                 
-                $("#info").text("YOU LOSE");
+                $("#info").text("YOU LOSE! The answer was rutabaga.");
               }
             }
             // If the letter is in the word, update the display
@@ -101,7 +101,7 @@
               // Check if the player has won
               if (!blank.includes("-")) {
                 gameWon = true;
-                $("#info").text("YOU WIN");
+                $("#info").text("Congratulations YOU WIN!");
               }
             }
 
