@@ -1,13 +1,43 @@
-<!DOCTYPE html>
+c<!DOCTYPE html>
 <html>
 	<head>
 		<title>lab7.html</title>
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+			integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+			crossorigin=""/>
+		<style>
+			#map{
+				height: 600px;
+				width: 600px;
+				text-align: center;
+			}
+		</style>
+		<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+			integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+			crossorigin=""></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>  
 	</head>
 	
 	<body>
 		<div id="map"></div>
 		<script>
+      			var map = L.map('map').setView([52.52437, 13.41053], 15);
+			var marker = L.marker([52.5279, 13.4267]).addTo(map);
 			
+			]).addTo(map);
+      			L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
+        		maxZoom: 19,
+        		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    	 		}).addTo(map);
+			marker.bindPopup("<b>Märchenbrunnen</b><br>The fountain of fairy tales").openPopup();
+			
+			function onMapClick(e){
+				popup
+					.setLatLng(e.latlng)
+					.setContent("You clicked the map at " + e.latlng.toString())
+					.openOn(map);
+			}
+			map.on('click', onMapClick);
 		</script>
 	</body>
 </html>
