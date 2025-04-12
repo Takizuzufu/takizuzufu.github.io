@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+c<!DOCTYPE html>
 <html>
 	<head>
 		<title>lab7.html</title>
@@ -23,7 +23,7 @@
 		<script>
       			var map = L.map('map').setView([52.520008,13.404954], 20);
 			var marker = L.marker([52.5279, 13.4267]).addTo(map);
-			var circle = L.circle([-51.508, 0.11], {
+			var circle = L.circle([52.527921, 13.42698], {
 				color: 'red',
 				fillColor: '#f03',
 				fillOpacity: 0.5,
@@ -38,7 +38,7 @@
         		maxZoom: 19,
         		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     	 		}).addTo(map);
-			marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+			marker.bindPopup("<b>Märchenbrunnen</b><br>The fountain of fairy tales").openPopup();
 			circle.bindPopup("I am a circle.");
 			polygon.bindPopup("I am a polygon.");
 			var popup = L.popup()
