@@ -21,7 +21,7 @@ c<!DOCTYPE html>
 	<body>
 		<div id="map"></div>
 		<script>
-      			var map = L.map('map').setView([52.53437, 13.41053], 13);
+      			var map = L.map('map').setView([52.53437, 13.41053], 17);
       			L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
         		maxZoom: 19,
         		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -57,9 +57,13 @@ c<!DOCTYPE html>
 			}).addTo(map);
 			var popup = L.popup();
 			var marker = L.marker([52.530833, 13.450833]).addTo(map);
-			marker.bindPopup("<b>Velodrom").openPopup();
+			marker.bindPopup("Velodrom").openPopup();
 			circle.bindPopup("Marx-Engels-Forum");
 			polygon.bindPopup("Volkspark Friedrichshain");
+			var popup = L.popup()
+				.setLatLng([51.513, -0.09])
+				.setContent("I am a standalone popup.")
+				.openOn(map);
 			function onMapClick(e){
 				popup
 					.setLatLng(e.latlng)
