@@ -48,16 +48,23 @@ c<!DOCTYPE html>
 				[52.523412, 13.433651],
 				[52.527188, 13.427235]				
 			]).addTo(map);
-			var circle = L.circle([52.518534, 13.404624],{
-				color: 'red',
-				fillColor: '#f03',
+			var circle1 = L.circle([52.518534, 13.404624],{
+				color: 'yellow',
+				fillColor: '#EEE8AA',
+				fillOpacity: 0.5,
+				radius: 150
+			}).addTo(map);
+			var circle2 = L.circle([52.518534, 13.404624],{
+				color: 'blue',
+				fillColor: 'SteelBlue',
 				fillOpacity: 0.5,
 				radius: 150
 			}).addTo(map);
 			var popup = L.popup();
 			var marker = L.marker([52.530833, 13.450833]).addTo(map);
 			marker.bindPopup("Velodrom").openPopup();
-			circle.bindPopup("Marx-Engels-Forum");
+			circle1.bindPopup("Marx-Engels-Forum");
+			circle2.bindPopup("Park am Weißen See");
 			polygon.bindPopup("Volkspark Friedrichshain");
 			var popup = L.popup()
 				.setLatLng([52.543092, 13.405434])
