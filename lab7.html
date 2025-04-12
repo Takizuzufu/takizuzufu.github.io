@@ -84,8 +84,10 @@ c<!DOCTYPE html>
 				radius: 150
 			}).addTo(map);
 			var popup = L.popup();
-			var marker = L.marker([52.530833, 13.450833]).addTo(map);
-			marker.bindPopup("Velodrom").openPopup();
+			var marker1 = L.marker([52.530833, 13.450833]).addTo(map);
+			var marker2 = L.marker([52.543059, 13.405294],{color: 'yellow'}).addTo(map);
+			marker1.bindPopup("Velodrom").openPopup();
+			marker1.bindPopup("Friedrich-Ludwig-Jahn-Stadion").openPopup();
 			circle1.bindPopup("Marx-Engels-Forum");
 			circle2.bindPopup("Park am Weißen See");
 			polygon1.bindPopup("Volkspark Friedrichshain");
