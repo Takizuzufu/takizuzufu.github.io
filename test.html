@@ -7,8 +7,8 @@ c<!DOCTYPE html>
 			crossorigin=""/>
 		<style>
 			#map{
-				height: 600px;
-				width: 600px;
+				height: 800px;
+				width: 800px;
 				text-align: center;
 			}
 		</style>
@@ -57,6 +57,9 @@ c<!DOCTYPE html>
 			}).addTo(map);
 			var popup = L.popup();
 			var marker = L.marker([52.530833, 13.450833]).addTo(map);
+			marker.bindPopup("<b>Velodrom").openPopup();
+			circle.bindPopup("Marx-Engels-Forum");
+			polygon.bindPopup("Volkspark Friedrichshain");
 			function onMapClick(e){
 				popup
 					.setLatLng(e.latlng)
