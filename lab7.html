@@ -46,8 +46,12 @@ c<!DOCTYPE html>
 				[52.524672, 13.43725],
 				[52.523653, 13.43717],
 				[52.523412, 13.433651],
-				[52.527188, 13.427235]				
-			]).addTo(map);
+				[52.527188, 13.427235]
+				],{
+				color: 'darkolivegreen',
+				fillColor: 'olivedrab',
+				fillOpacity: 0.5,
+			}).addTo(map);
 			var polygon2 = L.polygon([
 				[52.554666, 13.402419],
 				[52.55492, 13.399018],
@@ -61,11 +65,15 @@ c<!DOCTYPE html>
 				[52.558009, 13.402575],
 				[52.55778, 13.407041],
 				[52.555646, 13.406697],
-				[52.555807, 13.402607],	
-			]).addTo(map);
+				[52.555807, 13.402607]
+				],{						 
+				color: 'darkgreen',
+				fillColor: 'forestgreen',
+				fillOpacity: 0.5,).addTo(map);
+			}).addTo(map);
 			var circle1 = L.circle([52.518534, 13.404624],{
-				color: 'yellow',
-				fillColor: '#EEE8AA',
+				color: 'plum',
+				fillColor: 'thistle',
 				fillOpacity: 0.5,
 				radius: 150
 			}).addTo(map);
