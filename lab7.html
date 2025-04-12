@@ -25,7 +25,7 @@ c<!DOCTYPE html>
         		maxZoom: 19,
         		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     	 		}).addTo(map);
-			var polygon = L.polygon([
+			var polygon1 = L.polygon([
 				[52.528074, 13.42529],
 				[52.529528, 13.437508],
 				[52.528572, 13.438489],
@@ -48,6 +48,21 @@ c<!DOCTYPE html>
 				[52.523412, 13.433651],
 				[52.527188, 13.427235]				
 			]).addTo(map);
+			var polygon2 = L.polygon([
+				[52.554666, 13.402419],
+				[52.55492, 13.399018],
+				[52.555196, 13.399096],
+				[52.556469, 13.398817],
+				[52.557138, 13.398629],
+				[52.557828, 13.399214],
+				[52.557723, 13.401196],
+				[52.557764, 13.401335],
+				[52.557609, 13.40261],
+				[52.558009, 13.402575],
+				[52.55778, 13.407041],
+				[52.555646, 13.406697],
+				[52.555807, 13.402607],	
+			]).addTo(map);
 			var circle1 = L.circle([52.518534, 13.404624],{
 				color: 'yellow',
 				fillColor: '#EEE8AA',
@@ -65,7 +80,8 @@ c<!DOCTYPE html>
 			marker.bindPopup("Velodrom").openPopup();
 			circle1.bindPopup("Marx-Engels-Forum");
 			circle2.bindPopup("Park am Weißen See");
-			polygon.bindPopup("Volkspark Friedrichshain");
+			polygon1.bindPopup("Volkspark Friedrichshain");
+			polygon2.bindPopup("Kleingartenanlage Bornholm I e.V");
 			var popup = L.popup()
 				.setLatLng([52.543092, 13.405434])
 				.setContent("Friedrich-Ludwig-Jahn-Sportpark")
