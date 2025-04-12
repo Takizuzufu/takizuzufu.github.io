@@ -49,13 +49,14 @@ c<!DOCTYPE html>
 				[52.523412, 13.433651],
 				[52.527188, 13.427235]				
 			]).addTo(map);
-			var circle = L.circle([52.530833, 13.450833],{
+			var circle = L.circle([52.518534, 13.404624],{
 				color: 'red',
 				fillColor: '#f03',
 				fillOpacity: 0.5,
-				radius: 50
+				radius: 150
 			}).addTo(map);
 			var popup = L.popup();
+			var marker = L.marker([52.530833, 13.450833]).addTo(map);
 			function onMapClick(e){
 				popup
 					.setLatLng(e.latlng)
