@@ -22,15 +22,10 @@ c<!DOCTYPE html>
 		<div id="map"></div>
 		<script>
       			var map = L.map('map').setView([52.52437, 13.41053], 15);
-			var marker = L.marker([52.5279, 13.4267]).addTo(map);
-			
-			]).addTo(map);
       			L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
         		maxZoom: 19,
         		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     	 		}).addTo(map);
-			marker.bindPopup("<b>Märchenbrunnen</b><br>The fountain of fairy tales").openPopup();
-			
 			function onMapClick(e){
 				popup
 					.setLatLng(e.latlng)
