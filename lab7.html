@@ -91,11 +91,7 @@ c<!DOCTYPE html>
 			circle1.bindPopup("Marx-Engels-Forum");
 			circle2.bindPopup("Park am Weißen See");
 			polygon1.bindPopup("Volkspark Friedrichshain");
-			polygon2.bindPopup("Kleingartenanlage Bornholm I e.V");
-			var popup = L.popup()
-				.setLatLng([52.543092, 13.405434])
-				.setContent("Friedrich-Ludwig-Jahn-Sportpark")
-				.openOn(map);			
+			polygon2.bindPopup("Kleingartenanlage Bornholm I e.V");	
 			function onMapClick(e){
 				popup
 					.setLatLng(e.latlng)
