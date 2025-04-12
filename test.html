@@ -60,7 +60,10 @@ c<!DOCTYPE html>
 			marker.bindPopup("Velodrom").openPopup();
 			circle.bindPopup("Marx-Engels-Forum");
 			polygon.bindPopup("Volkspark Friedrichshain");
-			
+			var popup = L.popup()
+				.setLatLng([52.543092, 13.405434])
+				.setContent("Friedrich-Ludwig-Jahn-Sportpark")
+				.openOn(map);			
 			function onMapClick(e){
 				popup
 					.setLatLng(e.latlng)
