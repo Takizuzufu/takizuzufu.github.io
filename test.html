@@ -1,76 +1,95 @@
-c<!DOCTYPE html>
-<html>
-	<head>
-		<title>lab7.html</title>
-		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-			integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-			crossorigin=""/>
-		<style>
-			#map{
-				height: 800px;
-				width: 800px;
-				text-align: center;
-			}
-		</style>
-		<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-			integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-			crossorigin=""></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>  
-	</head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<base target="_top">
+	<meta charset="utf8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
-	<body>
-		<div id="map"></div>
-		<script>
-      			var map = L.map('map').setView([52.53437, 13.41053], 13);
-      			L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
-        		maxZoom: 19,
-        		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    	 		}).addTo(map);
-			var polygon = L.polygon([
-				[52.528074, 13.42529],
-				[52.529528, 13.437508],
-				[52.528572, 13.438489],
-				[52.530967, 13.442298],
-				[52.528298, 13.445163],
-				[52.527002, 13.442084],
-				[52.526261, 13.442904],
-				[52.525951, 13.442078],
-				[52.526118, 13.441885],
-				[52.526042, 13.441654],
-				[52.526359, 13.441322],
-				[52.52618, 13.440869],
-				[52.527322, 13.439595],
-				[52.52742, 13.437808],
-				[52.526101, 13.435421],
-				[52.525688, 13.436631],
-				[52.524916, 13.436746],
-				[52.524672, 13.43725],
-				[52.523653, 13.43717],
-				[52.523412, 13.433651],
-				[52.527188, 13.427235]				
-			]).addTo(map);
-			var circle = L.circle([52.518534, 13.404624],{
-				color: 'red',
-				fillColor: '#f03',
-				fillOpacity: 0.5,
-				radius: 150
-			}).addTo(map);
-			var popup = L.popup();
-			var marker = L.marker([52.530833, 13.450833]).addTo(map);
-			marker.bindPopup("Velodrom").openPopup();
-			circle.bindPopup("Marx-Engels-Forum");
-			polygon.bindPopup("Volkspark Friedrichshain");
-			var popup = L.popup()
-				.setLatLng([52.543092, 13.405434])
-				.setContent("Friedrich-Ludwig-Jahn-Sportpark")
-				.openOn(map);			
-			function onMapClick(e){
-				popup
-					.setLatLng(e.latlng)
-					.setContent("You clicked the map at " + e.latlng.toString())
-					.openOn(map);
-			}
-			map.on('click', onMapClick);			
-		</script>
-	</body>
+	<title>Lab 8 - Denver Neighborhood Data</title>
+	
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+
+	<style>
+		html, body {
+			height: 100%;
+			margin: 0;
+		}
+		
+		#map { width:100%; height: 70%; }
+		
+		h1 { color: #3293a8;
+		     font-family: "Garamond", serif;
+		     font-size: 20px;
+		    }
+		
+		p { font: serif 10px;
+		    color: #3293a8;
+		  }
+		
+		#header {
+			width: 100%;
+			margin: auto;
+			align: center;
+		}
+		
+		a { text-decoration: none; color: inherit; }
+	</style>
+
+<script>
+
+  // the document ready wraps our javascript
+	// to make sure that everything loads in the 
+	// right order
+	$(document).ready(function() {
+
+		// let's create our basemap! -- ##1 here
+		
+		
+		// let's add three sets of background tiles - one from OSM,  one from HOT OSM, and one from openTopoMap
+		var OSMTiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			maxZoom: 19,
+			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+		}).addTo(map);
+		var HOTOSMTiles = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+			maxZoom: 19,
+    			attribution: '© OpenStreetMap contributors, Tiles style by Humanitarian OpenStreetMap Team hosted by OpenStreetMap France'});
+		var OpenTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+			maxZoom: 19,
+			attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'});
+
+		// this is an object to keep track of our three basemaps -- ##2 here
+		
+
+		// the control let's the user turn on / off layers -- ##3 here
+		
+
+		// let's add the Denver ACS data -- ##4 here
+		
+
+		// let's try to add some remote DRCOG data
+		$.getJSON('https://services1.arcgis.com/zdB7qR0BtYrg0Xpl/arcgis/rest/services/ODC_TRANS_RTDPARKNRIDE_P/FeatureServer/280/query?outFields=*&where=1%3D1&f=geojson', function(data) {
+			newLayer = L.geoJSON(data);
+			layerControl.addOverlay(newLayer, "RTD Park-N-Ride");
+		});
+
+
+	// end document ready
+	});
+
+</script>
+</head>
+<body>
+
+
+<div id="header">
+	<h1><a href="https://www.census.gov/programs-surveys/acs">Denver 2021 American Community Survey (Census) data</a></h1>
+	<p>Data from <a href="https://opendata-geospatialdenver.hub.arcgis.com/maps/619c7f836b6e4188b0e0f0458aecba26">Denver Open Data Catalog</a></p>
+</div>
+<div id="map"></div>
+
+
+</body>
 </html>
