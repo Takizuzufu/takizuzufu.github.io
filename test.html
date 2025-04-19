@@ -73,7 +73,7 @@
 			acs_Den_2021_layer = L.geoJSON(data).addTo(map);
 			
 		// move map to data
-			map.panTo(acs_Den_2021_layer.setBounds().getCenter());
+			map.panTo(acs_Den_2021_layer.getBounds().getCenter());
 
 		// add layer to layer control 
 			layerControl.addOverlay(acs_Den_2021_layer, 'Denver 2021 Census Data');
