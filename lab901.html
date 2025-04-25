@@ -5,7 +5,7 @@
 	<meta charset="utf8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
-	<title>Lab 8 - Denver Neighborhood Data</title>
+	<title>Lab 9 - Denver Neighborhood Data Choropleth</title>
 	
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -67,10 +67,32 @@
 
 		// the control let's the user turn on / off layers -- ##3 here
 		var layerControl = L.control.layers(baseMaps, null).addTo(map);
-
+		
+		//Lab 9
+		function style1(feature){
+			d = feature.properties.PCT_AGE65PLUS;
+			answer = d > 10 ? '#88419d' :
+				d > 5 ? '#8c96c6' :
+				d > 1 ? '#b3cde3' :
+					'#edf8fb';
+			
+			styleReturn = {
+				fillColor : answer,
+				weight : 1,
+				opacity : 1,
+				color : 'white',
+				dashArray : '3',
+				fillOpacity : 0.7
+			};
+return styleReturn;
+}
 		// let's add the Denver ACS data -- ##4 here
 		$.getJSON('./acs_denver_2021.geojson', function(data) {
-			acs_Den_2021_layer = L.geoJSON(data).addTo(map);
+			acs_Den_2021_layer = L.geoJSON(data, {style : style1,onEachFeature : function(feature, layer) {
+				layer.bindPopup("Percent of Population over the age of 65: " +
+						feature.properties.PCT_AGE65PLUS + "%");
+			}
+		}).addTo(map);
 			
 		// move map to data
 			map.panTo(acs_Den_2021_layer.getBounds().getCenter());
