@@ -70,14 +70,14 @@
 		
 		//Lab 9
 		function style1(feature) {
-			d = feature.properties.PCT_POVERTY;
+			d = feature.properties.(PCT_HISPANIC + PCT_BLACK);
 			answer = d > 30 ? '#800026' : 
 				d > 20 ? '#DB0026 ' :
 				d > 15 ? '#E31A1C' :
 				d > 10 ? '#FC4E2A' :
 				d > 5 ? '#FD8D3C' :
 				d > 3 ? '#FEB24C' :
-				d > 1 ? '#FED976' :
+				d >  ? '#FED976' :
 				'#FFEDA0';
 			styleReturn = {
 				fillColor : answer,
