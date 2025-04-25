@@ -5,7 +5,7 @@
 	<meta charset="utf8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
-	<title>Lab 8 - Denver Neighborhood Data</title>
+	<title>Lab 9 - Denver Neighborhood Data Choropleth</title>
 	
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -70,7 +70,7 @@
 		
 		//Lab 9
 		function style1(feature) {
-			d = feature.properties.(PCT_HISPANIC + PCT_BLACK);
+			d = feature.properties.PCT_AGE65PLUS;
 			answer = d > 30 ? '#800026' : 
 				d > 20 ? '#DB0026 ' :
 				d > 15 ? '#E31A1C' :
