@@ -36,6 +36,21 @@
 		}
 		
 		a { text-decoration: none; color: inherit; }
+		
+		.legend {
+			line-height: 18px;
+			color: #555;
+			background-color: #eeeeee;
+			padding: 2px;
+		}
+		
+		.legend i {
+			width: 18px;
+			height: 18px;
+			float: left;
+			margin-right: 8px;
+			opacity: 0.8;
+		}
 	</style>
 
 <script>
@@ -71,13 +86,14 @@
 		//Lab 9
 		function style1(feature){
 			d = feature.properties.PCT_AGE65PLUS;
-			answer = d > 50 ? '#6e016b' :
-				d > 35 ? '#88419d' :
-				d > 25 ? '#8c6bb1' :
-				d > 15 ? '#8c96c6' :
+			answer = d > 30 ? '#6e016b':
+				d > 20 ? '#88419d' :
+				d > 15 ? '#8c6bb1' :
+				d > 10 ? '#8c96c6' :
 				d > 5 ? '#9ebcda' :
-				d > 1 ? '#bfd3e6' :
-					'#edf8fb';
+				d > 3 ? '#bfd3e6' :
+				d > 1 ? '#e0ecf4' :
+					'#f7fcfd';
 			
 			styleReturn = {
 				fillColor : answer,
@@ -87,8 +103,8 @@
 				dashArray : '3',
 				fillOpacity : 0.7
 			};
-return styleReturn;
-}
+		return styleReturn;
+		}
 		// let's add the Denver ACS data -- ##4 here
 		$.getJSON('./acs_denver_2021.geojson', function(data) {
 			acs_Den_2021_layer = L.geoJSON(data, {style : style1,onEachFeature : function(feature, layer) {
@@ -108,6 +124,21 @@ return styleReturn;
 			newLayer = L.geoJSON(data);
 			layerControl.addOverlay(newLayer, "RTD Park-N-Ride");
 		});
+		var legend = L.control({position: 'bottomright'});
+		legend.onAdd = function (map) {
+			var div = L.DomUtil.create('div', 'info legend');
+			colors = ['#f7fcfd','#e0ecf4','#bfd3e6' ,'#9ebcda','#8c96c6','#8c6bb1','#88419d','#6e016b'];
+			labels = ['0 - 1%', '1 - 3%', '3 - 5%', '5 - 10%', '10 - 15%',
+				  '15 - 20%', '20 - 30%','30%+' ];
+
+			div.innerHTML = '<h2>% Over the age of 65</h2>';
+
+			for (var i = 0; i < colors.length; i++) {
+				div.innerHTML += '<i style="background:' + colors[i] + '"></i> ' + labels[i] + '<br>';
+			}
+			return div;
+		};
+		legend.addTo(map);
 
 
 	// end document ready
@@ -119,7 +150,7 @@ return styleReturn;
 
 
 <div id="header">
-	<h1><a href="https://www.census.gov/programs-surveys/acs">Denver 2021 American Community Survey (Census) data: Percentage over the Age of 65</a></h1>
+	<h1><a href="https://www.census.gov/programs-surveys/acs"></a></h1>
 	<p>Data from <a href="https://opendata-geospatialdenver.hub.arcgis.com/maps/619c7f836b6e4188b0e0f0458aecba26">Denver Open Data Catalog</a></p>
 </div>
 <div id="map"></div>
