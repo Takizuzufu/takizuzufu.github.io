@@ -5,78 +5,155 @@
 	<meta charset="utf8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
-	<title>Layers Control Tutorial - Leaflet</title>
+	<title>Lab 9 - Denver Neighborhood Data Choropleth</title>
 	
-	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 	<style>
 		html, body {
 			height: 100%;
 			margin: 0;
 		}
-		.leaflet-container {
-			height: 400px;
-			width: 600px;
-			max-width: 100%;
-			max-height: 100%;
+		
+		#map { width:100%; height: 70%; }
+		
+		h1 { color: #4d004b;
+		     font-family: "Garamond", serif;
+		     font-size: 20px;
+		    }
+		
+		p { font: serif 10px;
+		    color: #810f7c;
+		  }
+		
+		#header {
+			width: 100%;
+			margin: auto;
+			align: center;
+		}
+		
+		a { text-decoration: none; color: inherit; }
+		
+		.legend {
+			line-height: 18px;
+			color: #555;
+			background-color: #eeeeee;
+			padding: 2px;
+		}
+		
+		.legend i {
+			width: 18px;
+			height: 18px;
+			float: left;
+			margin-right: 8px;
+			opacity: 0.8;
 		}
 	</style>
 
-	
+<script>
+
+  // the document ready wraps our javascript
+	// to make sure that everything loads in the 
+	// right order
+	$(document).ready(function() {
+
+		// let's create our basemap! -- ##1 here
+		map = L.map('map',{center: [0,0], zoom: 10});
+		
+		// let's add three sets of background tiles - one from OSM,  one from HOT OSM, and one from openTopoMap
+		var OSMTiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			maxZoom: 19,
+			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+		}).addTo(map);
+		var HOTOSMTiles = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+			maxZoom: 19,
+    			attribution: '© OpenStreetMap contributors, Tiles style by Humanitarian OpenStreetMap Team hosted by OpenStreetMap France'});
+		var OpenTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+			maxZoom: 19,
+			attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'});
+
+		// this is an object to keep track of our three basemaps -- ##2 here
+		var baseMaps = { "OpenStreetMap" : OSMTiles,
+				"Humanitarian OSM" : HOTOSMTiles,
+				"OpenTopoMap" : OpenTopoMap };
+
+		// the control let's the user turn on / off layers -- ##3 here
+		var layerControl = L.control.layers(baseMaps, null).addTo(map);
+		
+		//Lab 9
+		function style1(feature){
+			d = feature.properties.PCT_AGE65PLUS;
+			answer = d > 30 ? '#6e016b':
+				d > 20 ? '#88419d' :
+				d > 15 ? '#8c6bb1' :
+				d > 10 ? '#8c96c6' :
+				d > 5 ? '#9ebcda' :
+				d > 3 ? '#bfd3e6' :
+				d > 1 ? '#e0ecf4' :
+					'#f7fcfd';
+			
+			styleReturn = {
+				fillColor : answer,
+				weight : 1,
+				opacity : 1,
+				color : '#4d004b',
+				dashArray : '3',
+				fillOpacity : 0.7
+			};
+		return styleReturn;
+		}
+		// let's add the Denver ACS data -- ##4 here
+		$.getJSON('./acs_denver_2021.geojson', function(data) {
+			acs_Den_2021_layer = L.geoJSON(data, {style : style1,onEachFeature : function(feature, layer) {
+				layer.bindPopup("Percent of Population over the age of 65: " +
+						feature.properties.PCT_AGE65PLUS + "%");
+			}
+		}).addTo(map);
+			
+		// move map to data
+			map.panTo(acs_Den_2021_layer.getBounds().getCenter());
+
+		// add layer to layer control 
+			layerControl.addOverlay(acs_Den_2021_layer, 'Denver 2021 Census Data');
+		});
+		// let's try to add some remote DRCOG data
+		$.getJSON('https://services1.arcgis.com/zdB7qR0BtYrg0Xpl/arcgis/rest/services/ODC_TRANS_RTDPARKNRIDE_P/FeatureServer/280/query?outFields=*&where=1%3D1&f=geojson', function(data) {
+			newLayer = L.geoJSON(data);
+			layerControl.addOverlay(newLayer, "RTD Park-N-Ride");
+		});
+		var legend = L.control({position: 'bottomright'});
+		legend.onAdd = function (map) {
+			var div = L.DomUtil.create('div', 'info legend');
+			colors = ['#f7fcfd','#e0ecf4','#bfd3e6' ,'#9ebcda','#8c96c6','#8c6bb1','#88419d','#6e016b'];
+			labels = ['0 - 1%', '1 - 3%', '3 - 5%', '5 - 10%', '10 - 15%',
+				  '15 - 20%', '20 - 30%','30%+' ];
+
+			div.innerHTML = '<h2>% Over the age of 65</h2>';
+
+			for (var i = 0; i < colors.length; i++) {
+				div.innerHTML += '<i style="background:' + colors[i] + '"></i> ' + labels[i] + '<br>';
+			}
+			return div;
+		};
+		legend.addTo(map);
+
+
+	// end document ready
+	});
+
+</script>
 </head>
 <body>
 
-<div id='map'></div>
 
-<script>
-const cities = L.layerGroup();
-const mLittleton = L.marker([39.61, -105.02]).bindPopup('This is Littleton, CO.').addTo(cities);
-const mDenver = L.marker([39.74, -104.99]).bindPopup('This is Denver, CO.').addTo(cities);
-const mAurora = L.marker([39.73, -104.8]).bindPopup('This is Aurora, CO.').addTo(cities);
-const mGolden = L.marker([39.77, -105.23]).bindPopup('This is Golden, CO.').addTo(cities);
-const osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-	maxZoom: 19,
-	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-});
-
-const osmHOT = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-	maxZoom: 19,
-	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/" target="_blank">Humanitarian OpenStreetMap Team</a> hosted by <a href="https://openstreetmap.fr/" target="_blank">OpenStreetMap France</a>'
-});
-
-const map = L.map('map', {
-	center: [39.73, -104.99],
-	zoom: 10,
-	layers: [osm, cities]
-});
-
-const baseLayers = {
-	'OpenStreetMap': osm,
-	'OpenStreetMap.HOT': osmHOT
-};
-
-const overlays = {
-	'Cities': cities
-};
-
-const layerControl = L.control.layers(baseLayers, overlays).addTo(map);
-
-const crownHill = L.marker([39.75, -105.09]).bindPopup('This is Crown Hill Park.');
-const rubyHill = L.marker([39.68, -105.00]).bindPopup('This is Ruby Hill Park.');
-
-const parks = L.layerGroup([crownHill, rubyHill]);
-
-const openTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-	maxZoom: 19,
-	attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
-});
-layerControl.addBaseLayer(openTopoMap, 'OpenTopoMap');
-layerControl.addOverlay(parks, 'Parks');
-</script>
-
+<div id="header">
+	<h1><a href="https://www.census.gov/programs-surveys/acs"></a></h1>
+	<p>Data from <a href="https://opendata-geospatialdenver.hub.arcgis.com/maps/619c7f836b6e4188b0e0f0458aecba26">Denver Open Data Catalog</a></p>
+</div>
+<div id="map"></div>
 
 
 </body>
