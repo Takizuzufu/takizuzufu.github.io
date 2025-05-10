@@ -5,7 +5,7 @@
 	<meta charset="utf8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
-	<title>Final Project</title>
+	<title>Lab 9 - Denver Neighborhood Data Choropleth</title>
 	
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -61,7 +61,7 @@
 	$(document).ready(function() {
 
 		// let's create our basemap! -- ##1 here
-		map = L.map('map',{center: [0,0], zoom: 5});
+		map = L.map('map',{center: [0,0], zoom: 10});
 		
 		// let's add three sets of background tiles - one from OSM,  one from HOT OSM, and one from openTopoMap
 		var OSMTiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -85,7 +85,7 @@
 		
 		//Lab 9
 		function style1(feature){
-			d = feature.PCT_Females;
+			d = feature.properties.PCT_AGE65PLUS;
 			answer = d > 30 ? '#6e016b':
 				d > 20 ? '#88419d' :
 				d > 15 ? '#8c6bb1' :
@@ -107,9 +107,9 @@
 		}
 		// let's add the Denver ACS data -- ##4 here
 		$.getJSON('./gender.geojson', function(data) {
-			gender = L.geoJSON(data, {style : style1,onEachFeature : function(feature, layer) {
-				layer.bindPopup("Percent of Population that is considered female: " +
-						feature.properties.PCT_Females + "%");
+			acs_Den_2021_layer = L.geoJSON(data, {style : style1,onEachFeature : function(feature, layer) {
+				layer.bindPopup("Percent of Population over the age of 65: " +
+						feature.properties.1_PCT_Females + "%");
 			}
 		}).addTo(map);
 			
