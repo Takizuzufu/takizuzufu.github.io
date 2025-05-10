@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+</html><!DOCTYPE html>
 <head>
 	<base target="_top">
 	<meta charset="utf8">
@@ -54,6 +53,7 @@
 	</style>
 
 <script>
+	
 
   // the document ready wraps our javascript
 	// to make sure that everything loads in the 
@@ -154,6 +154,28 @@
 	<p>Data from <a href="https://opendata-geospatialdenver.hub.arcgis.com/maps/619c7f836b6e4188b0e0f0458aecba26">Denver Open Data Catalog</a></p>
 </div>
 <div id="map"></div>
+
+	
+<button id="language-toggle">Switch to Spanish</button>
+
+<p class="en">Hello, world!</p>
+<p class="es" style="display: none;">¡Hola, mundo!</p>
+
+<script>
+$(document).ready(function(){
+  $("#language-toggle").click(function(){
+    $(".en").toggle();
+    $(".es").toggle();
+
+    // Update button text based on current language
+    if ($(".en").is(":visible")) {
+      $(this).text("Switch to Spanish");
+    } else {
+      $(this).text("Switch to English");
+    }
+  });
+});
+</script>
 
 
 </body>
