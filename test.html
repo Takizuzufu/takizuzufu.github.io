@@ -106,10 +106,10 @@
 		return styleReturn;
 		}
 		// let's add the Denver ACS data -- ##4 here
-		$.getJSON('./acs_denver_2021.geojson', function(data) {
+		$.getJSON('./gender_de.geojson', function(data) {
 			acs_Den_2021_layer = L.geoJSON(data, {style : style1,onEachFeature : function(feature, layer) {
 				layer.bindPopup("Percent of Population over the age of 65: " +
-						feature.properties.PCT_AGE65PLUS + "%");
+						feature.properties.name + "%");
 			}
 		}).addTo(map);
 			
