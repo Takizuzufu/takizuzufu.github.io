@@ -107,7 +107,7 @@
 		}
 		// let's add the Denver ACS data -- ##4 here
 		$.getJSON('./gender.geojson', function(data) {
-			acs_Den_2021_layer = L.geoJSON(data, {style : style1,onEachFeature : function(feature, layer) {
+			gender = L.geoJSON(data, {style : style1,onEachFeature : function(feature, layer) {
 				layer.bindPopup("Percent of Population that is considered female: " +
 						feature.properties.PCT_Females + "%");
 			}
