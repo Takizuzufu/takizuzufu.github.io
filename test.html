@@ -5,103 +5,48 @@
 	<meta charset="utf8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
-	<title>Lab 9 - Denver Neighborhood Data Choropleth</title>
+	<title>Choropleth Tutorial - Leaflet</title>
 	
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
 
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 	<style>
 		html, body {
 			height: 100%;
 			margin: 0;
 		}
-		
-		#map { width:100%; height: 70%; }
-		
-		h1 { color: #4d004b;
-		     font-family: "Garamond", serif;
-		     font-size: 20px;
-		    }
-		
-		p { font: serif 10px;
-		    color: #810f7c;
-		  }
-		
-		#header {
-			width: 100%;
-			margin: auto;
-			align: center;
-		}
-		
-		a { text-decoration: none; color: inherit; }
-		
-		.legend {
-			line-height: 18px;
-			color: #555;
-			background-color: #eeeeee;
-			padding: 2px;
-		}
-		
-		.legend i {
-			width: 18px;
-			height: 18px;
-			float: left;
-			margin-right: 8px;
-			opacity: 0.8;
+		.leaflet-container {
+			height: 400px;
+			width: 600px;
+			max-width: 100%;
+			max-height: 100%;
 		}
 	</style>
 
-<script>
-
-  // the document ready wraps our javascript
-	// to make sure that everything loads in the 
-	// right order
-	$(document).ready(function() {
-
-
-		var map = L.map('map').setView([37.8, -96], 4);
-		
-		var tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-			maxZoom: 19,
-			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-		}).addTo(map);
-		
-		L.geoJson(1_sehr_hoch.geojson).addTo(map);
-		//Lab 9
-		function style1(feature){
-			d = feature.properties.PCT_AGE65PLUS;
-			answer = d > 30 ? '#6e016b':
-				d > 20 ? '#88419d' :
-				d > 15 ? '#8c6bb1' :
-				d > 10 ? '#8c96c6' :
-				d > 5 ? '#9ebcda' :
-				d > 3 ? '#bfd3e6' :
-				d > 1 ? '#e0ecf4' :
-					'#f7fcfd';
-			
-			styleReturn = {
-				fillColor : answer,
-				weight : 1,
-				opacity : 1,
-				color : '#4d004b',
-				dashArray : '3',
-				fillOpacity : 0.7
-			};
-		return styleReturn;
-		}
-
-</script>
+	
 </head>
 <body>
 
+<div id='map'></div>
 
-<div id="header">
-	<h1><a href="https://www.census.gov/programs-surveys/acs"></a></h1>
-	<p>Data from <a href="https://opendata-geospatialdenver.hub.arcgis.com/maps/619c7f836b6e4188b0e0f0458aecba26">Denver Open Data Catalog</a></p>
-</div>
-<div id="map"></div>
+<script type="text/javascript" src="1_sehr_hoch.geojson"></script>
+
+<script type="text/javascript">
+
+	const map = L.map('map').setView([37.8, -96], 4);
+
+	const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		maxZoom: 19,
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+	}).addTo(map);
+
+	/* global statesData */
+	const geojson = L.geoJson(statesData).addTo(map);
+
+</script>
+
 
 
 </body>
