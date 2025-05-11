@@ -105,6 +105,43 @@
 			};
 		return styleReturn;
 		}
+		function highlightFeature(e) {
+		const layer = e.target;
+
+		layer.setStyle({
+			weight: 5,
+			color: '#666',
+			dashArray: '',
+			fillOpacity: 0.7
+		});
+
+		layer.bringToFront();
+
+		info.update(layer.feature.properties);
+	}
+
+	/* global statesData */
+	const geojson = L.geoJson(statesData, {
+		style,
+		onEachFeature
+	}).addTo(map);
+
+	function resetHighlight(e) {
+		geojson.resetStyle(e.target);
+		info.update();
+	}
+
+	function zoomToFeature(e) {
+		map.fitBounds(e.target.getBounds());
+	}
+
+	function onEachFeature(feature, layer) {
+		layer.on({
+			mouseover: highlightFeature,
+			mouseout: resetHighlight,
+			click: zoomToFeature
+		});
+	}
 		// let's add the Denver ACS data -- ##4 here
 		$.getJSON('./acs_denver_2021.geojson', function(data) {
 			acs_Den_2021_layer = L.geoJSON(data, {style : style1,onEachFeature : function(feature, layer) {
@@ -124,6 +161,8 @@
 			newLayer = L.geoJSON(data);
 			layerControl.addOverlay(newLayer, "RTD Park-N-Ride");
 		});
+
+		//Create a legend for the data
 		var legend = L.control({position: 'bottomright'});
 		legend.onAdd = function (map) {
 			var div = L.DomUtil.create('div', 'info legend');
