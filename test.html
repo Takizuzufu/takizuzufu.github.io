@@ -5,7 +5,7 @@
 	<meta charset="utf8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
-	<title>Final Project Test</title>
+	<title>Lab 9 - Denver Neighborhood Data Choropleth</title>
 	
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -82,21 +82,6 @@
 
 		// the control let's the user turn on / off layers -- ##3 here
 		var layerControl = L.control.layers(baseMaps, null).addTo(map);
-
-		const info = L.control();
-
-	info.onAdd = function (map) {
-		this._div = L.DomUtil.create('div', 'info');
-		this.update();
-		return this._div;
-	};
-
-	info.update = function (props) {
-		const contents = props ? `<b>${props.name}</b><br />${props.density} people / mi<sup>2</sup>` : 'Hover over a state';
-		this._div.innerHTML = `<h4>US Population Density</h4>${contents}`;
-	};
-
-	info.addTo(map);
 		
 		//Lab 9
 		function style1(feature){
@@ -120,22 +105,7 @@
 			};
 		return styleReturn;
 		}
-		
-		function highlightFeature(e) {
-		const layer = e.target;
-
-		layer.setStyle({
-			weight: 5,
-			color: '#666',
-			dashArray: '',
-			fillOpacity: 0.7
-		});
-			layer.bringToFront();
-			info.update(layer.feature.properties);
-		}
-		
-
-	// let's add the Denver ACS data -- ##4 here
+		// let's add the Denver ACS data -- ##4 here
 		$.getJSON('./acs_denver_2021.geojson', function(data) {
 			acs_Den_2021_layer = L.geoJSON(data, {style : style1,onEachFeature : function(feature, layer) {
 				layer.bindPopup("Percent of Population over the age of 65: " +
