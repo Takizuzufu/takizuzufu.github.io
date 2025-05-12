@@ -68,6 +68,28 @@
 		// the control let's the user turn on / off layers -- ##3 here
 		var layerControl = L.control.layers(baseMaps, null).addTo(map);
 
+		function style1(feature){
+			d = feature.properties.2_pop_density;
+			answer = d > 3000 ? '#6e016b':
+				d > 2000 ? '#88419d' :
+				d > 1500 ? '#8c6bb1' :
+				d > 1000 ? '#8c96c6' :
+				d > 500 ? '#9ebcda' :
+				d > 300 ? '#bfd3e6' :
+				d > 100 ? '#e0ecf4' :
+					'#f7fcfd';
+			
+			styleReturn = {
+				fillColor : answer,
+				weight : 1,
+				opacity : 1,
+				color : '#4d004b',
+				dashArray : '3',
+				fillOpacity : 0.7
+			};
+		return styleReturn;
+		}
+
 		// let's add the Denver ACS data -- ##4 here
 		$.getJSON('./deutsch_census.geojson', function(data) {
 			census_de = L.geoJSON(data).addTo(map);
