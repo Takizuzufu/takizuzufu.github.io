@@ -69,7 +69,7 @@
 		var layerControl = L.control.layers(baseMaps, null).addTo(map);
 
 		// let's add the Denver ACS data -- ##4 here
-		$.getJSON('./census_de.geojson', function(data) {
+		$.getJSON('./census_de_2022.geojson', function(data) {
 			census_de = L.geoJSON(data).addTo(map);
 			
 		// move map to data
