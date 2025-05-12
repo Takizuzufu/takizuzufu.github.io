@@ -5,7 +5,7 @@
 	<meta charset="utf8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
-	<title>Lab 8 - Denver Neighborhood Data</title>
+	<title>Lab 9 - Denver Neighborhood Data Choropleth</title>
 	
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -20,13 +20,13 @@
 		
 		#map { width:100%; height: 70%; }
 		
-		h1 { color: #3293a8;
+		h1 { color: #4d004b;
 		     font-family: "Garamond", serif;
 		     font-size: 20px;
 		    }
 		
 		p { font: serif 10px;
-		    color: #3293a8;
+		    color: #810f7c;
 		  }
 		
 		#header {
@@ -36,6 +36,21 @@
 		}
 		
 		a { text-decoration: none; color: inherit; }
+		
+		.legend {
+			line-height: 18px;
+			color: #555;
+			background-color: #eeeeee;
+			padding: 2px;
+		}
+		
+		.legend i {
+			width: 18px;
+			height: 18px;
+			float: left;
+			margin-right: 8px;
+			opacity: 0.8;
+		}
 	</style>
 
 <script>
@@ -46,7 +61,7 @@
 	$(document).ready(function() {
 
 		// let's create our basemap! -- ##1 here
-		map = L.map('map',{center: [0,0], zoom: 5});
+		map = L.map('map',{center: [0,0], zoom: 10});
 		
 		// let's add three sets of background tiles - one from OSM,  one from HOT OSM, and one from openTopoMap
 		var OSMTiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -67,16 +82,17 @@
 
 		// the control let's the user turn on / off layers -- ##3 here
 		var layerControl = L.control.layers(baseMaps, null).addTo(map);
-
+		
+		//Lab 9
 		function style1(feature){
 			d = feature.properties.2_pop_density;
-			answer = d > 3000 ? '#6e016b':
-				d > 2000 ? '#88419d' :
-				d > 1500 ? '#8c6bb1' :
-				d > 1000 ? '#8c96c6' :
-				d > 500 ? '#9ebcda' :
-				d > 300 ? '#bfd3e6' :
-				d > 100 ? '#e0ecf4' :
+			answer = d > 30 ? '#6e016b':
+				d > 20 ? '#88419d' :
+				d > 15 ? '#8c6bb1' :
+				d > 10 ? '#8c96c6' :
+				d > 5 ? '#9ebcda' :
+				d > 3 ? '#bfd3e6' :
+				d > 1 ? '#e0ecf4' :
 					'#f7fcfd';
 			
 			styleReturn = {
@@ -89,17 +105,42 @@
 			};
 		return styleReturn;
 		}
-
 		// let's add the Denver ACS data -- ##4 here
 		$.getJSON('./deutsch_census.geojson', function(data) {
-			census_de = L.geoJSON(data).addTo(map);
+			acs_Den_2021_layer = L.geoJSON(data, {style : style1,onEachFeature : function(feature, layer) {
+				layer.bindPopup("Percent of Population over the age of 65: " +
+						feature.properties.2_pop_density + "%");
+			}
+		}).addTo(map);
 			
 		// move map to data
-			map.panTo(census_de.getBounds().getCenter());
+			map.panTo(acs_Den_2021_layer.getBounds().getCenter());
 
 		// add layer to layer control 
-			layerControl.addOverlay(census_de, 'Germany 2022 Population Density');
+			layerControl.addOverlay(acs_Den_2021_layer, 'Denver 2021 Census Data');
 		});
+		// let's try to add some remote DRCOG data
+		$.getJSON('https://services1.arcgis.com/zdB7qR0BtYrg0Xpl/arcgis/rest/services/ODC_TRANS_RTDPARKNRIDE_P/FeatureServer/280/query?outFields=*&where=1%3D1&f=geojson', function(data) {
+			newLayer = L.geoJSON(data);
+			layerControl.addOverlay(newLayer, "RTD Park-N-Ride");
+		});
+		var legend = L.control({position: 'bottomright'});
+		legend.onAdd = function (map) {
+			var div = L.DomUtil.create('div', 'info legend');
+			colors = ['#f7fcfd','#e0ecf4','#bfd3e6' ,'#9ebcda','#8c96c6','#8c6bb1','#88419d','#6e016b'];
+			labels = ['0 - 1%', '1 - 3%', '3 - 5%', '5 - 10%', '10 - 15%',
+				  '15 - 20%', '20 - 30%','30%+' ];
+
+			div.innerHTML = '<h2>% Over the age of 65</h2>';
+
+			for (var i = 0; i < colors.length; i++) {
+				div.innerHTML += '<i style="background:' + colors[i] + '"></i> ' + labels[i] + '<br>';
+			}
+			return div;
+		};
+		legend.addTo(map);
+
+
 	// end document ready
 	});
 
@@ -109,7 +150,7 @@
 
 
 <div id="header">
-	<h1><a href="https://www.census.gov/programs-surveys/acs">Denver 2021 American Community Survey (Census) data</a></h1>
+	<h1><a href="https://www.census.gov/programs-surveys/acs"></a></h1>
 	<p>Data from <a href="https://opendata-geospatialdenver.hub.arcgis.com/maps/619c7f836b6e4188b0e0f0458aecba26">Denver Open Data Catalog</a></p>
 </div>
 <div id="map"></div>
