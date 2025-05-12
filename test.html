@@ -85,7 +85,7 @@
 		
 		//Lab 9
 		function style1(feature){
-			d = feature.properties.2_pop_density;
+			d = feature.properties.PCT_AGE65PLUS;
 			answer = d > 30 ? '#6e016b':
 				d > 20 ? '#88419d' :
 				d > 15 ? '#8c6bb1' :
@@ -106,10 +106,10 @@
 		return styleReturn;
 		}
 		// let's add the Denver ACS data -- ##4 here
-		$.getJSON('./deutsch_census.geojson', function(data) {
+		$.getJSON('./acs_denver_2021.geojson', function(data) {
 			acs_Den_2021_layer = L.geoJSON(data, {style : style1,onEachFeature : function(feature, layer) {
 				layer.bindPopup("Percent of Population over the age of 65: " +
-						feature.properties.2_pop_density + "%");
+						feature.properties.PCT_AGE65PLUS + "%");
 			}
 		}).addTo(map);
 			
