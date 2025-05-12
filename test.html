@@ -69,14 +69,14 @@
 		var layerControl = L.control.layers(baseMaps, null).addTo(map);
 
 		// let's add the Denver ACS data -- ##4 here
-		$.getJSON('./1_sehr_hoch.geojson', function(data) {
-			acs_Den_2021_layer = L.geoJSON(data).addTo(map);
+		$.getJSON('./census_de.geojson', function(data) {
+			census_de = L.geoJSON(data).addTo(map);
 			
 		// move map to data
-			map.panTo(acs_Den_2021_layer.getBounds().getCenter());
+			map.panTo(census_de.getBounds().getCenter());
 
 		// add layer to layer control 
-			layerControl.addOverlay(acs_Den_2021_layer, 'Denver 2021 Census Data');
+			layerControl.addOverlay(census_de, 'Denver 2021 Census Data');
 		});
 		
 	// end document ready
