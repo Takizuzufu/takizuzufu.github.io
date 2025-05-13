@@ -109,7 +109,7 @@
 		$.getJSON('./tesr.geojson', function(data) {
 			acs_Den_2021_layer = L.geoJSON(data, {style : style1,onEachFeature : function(feature, layer) {
 				layer.bindPopup("Percent of Population over the age of 65: " +
-						feature.properties.PCT_AGE65PLUS + "%");
+						feature.properties.pop_density + "%");
 			}
 		}).addTo(map);
 			
