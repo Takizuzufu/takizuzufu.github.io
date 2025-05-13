@@ -85,14 +85,14 @@
 		
 		//Lab 9
 		function style1(feature){
-			d = feature.properties.PCT_AGE65PLUS;
-			answer = d > 30 ? '#6e016b':
-				d > 20 ? '#88419d' :
-				d > 15 ? '#8c6bb1' :
-				d > 10 ? '#8c96c6' :
-				d > 5 ? '#9ebcda' :
-				d > 3 ? '#bfd3e6' :
-				d > 1 ? '#e0ecf4' :
+			d = feature.properties.pop_density;
+			answer = d > 3000 ? '#6e016b':
+				d > 2000 ? '#88419d' :
+				d > 1500 ? '#8c6bb1' :
+				d > 1000 ? '#8c96c6' :
+				d > 500 ? '#9ebcda' :
+				d > 300 ? '#bfd3e6' :
+				d > 100 ? '#e0ecf4' :
 					'#f7fcfd';
 			
 			styleReturn = {
@@ -106,32 +106,54 @@
 		return styleReturn;
 		}
 		// let's add the Denver ACS data -- ##4 here
-		$.getJSON('./acs_denver_2021.geojson', function(data) {
-			acs_Den_2021_layer = L.geoJSON(data, {style : style1,onEachFeature : function(feature, layer) {
-				layer.bindPopup("Percent of Population over the age of 65: " +
-						feature.properties.PCT_AGE65PLUS + "%");
+		$.getJSON('./tesr.geojson', function(data) {
+			german_zensus = L.geoJSON(data, {style : style1,onEachFeature : function(feature, layer) {
+				layer.bindPopup("Population Density: " +
+						feature.properties.pop_density);
 			}
 		}).addTo(map);
 			
 		// move map to data
-			map.panTo(acs_Den_2021_layer.getBounds().getCenter());
+			map.panTo(german_zensus.getBounds().getCenter());
 
 		// add layer to layer control 
-			layerControl.addOverlay(acs_Den_2021_layer, 'Denver 2021 Census Data');
-		});
-		// let's try to add some remote DRCOG data
-		$.getJSON('https://services1.arcgis.com/zdB7qR0BtYrg0Xpl/arcgis/rest/services/ODC_TRANS_RTDPARKNRIDE_P/FeatureServer/280/query?outFields=*&where=1%3D1&f=geojson', function(data) {
-			newLayer = L.geoJSON(data);
-			layerControl.addOverlay(newLayer, "RTD Park-N-Ride");
-		});
+			layerControl.addOverlay(german_zensus, 'Germany 2022 Census Data');
+			
+			function onEachFeature(feature, layer) {
+				layer.on({
+					mouseover: highlightFeature,
+					mouseout: resetHighlight,
+					click: zoomToFeature
+				});
+				
+				function highlightFeature(e) {
+					var layer = e.target;
+					layer.setStyle({
+						weight: 5,
+						color: '#666',
+						dashArray: '',
+						fillOpacity: 0.7
+					});
+					layer.bringToFront();
+				}
+				function resetHighlight(e) {
+					geojson.resetStyle(e.target);
+				}
+			}
+			geojson = L.geoJson(statesData, {
+				style: style,
+				onEachFeature: onEachFeature
+			}).addTo(map);
+		});		
+				
 		var legend = L.control({position: 'bottomright'});
 		legend.onAdd = function (map) {
 			var div = L.DomUtil.create('div', 'info legend');
 			colors = ['#f7fcfd','#e0ecf4','#bfd3e6' ,'#9ebcda','#8c96c6','#8c6bb1','#88419d','#6e016b'];
-			labels = ['0 - 1%', '1 - 3%', '3 - 5%', '5 - 10%', '10 - 15%',
-				  '15 - 20%', '20 - 30%','30%+' ];
+			labels = ['0 - 100', '100 - 300', '300 - 500', '500 - 1000', '1000 - 1500',
+				  '1500 - 2000', '2000 - 3000','3000+' ];
 
-			div.innerHTML = '<h2>% Over the age of 65</h2>';
+			div.innerHTML = '<h2>Population Density </h2>';
 
 			for (var i = 0; i < colors.length; i++) {
 				div.innerHTML += '<i style="background:' + colors[i] + '"></i> ' + labels[i] + '<br>';
@@ -139,7 +161,6 @@
 			return div;
 		};
 		legend.addTo(map);
-
 
 	// end document ready
 	});
@@ -151,7 +172,7 @@
 
 <div id="header">
 	<h1><a href="https://www.census.gov/programs-surveys/acs"></a></h1>
-	<p>Data from <a href="https://opendata-geospatialdenver.hub.arcgis.com/maps/619c7f836b6e4188b0e0f0458aecba26">Denver Open Data Catalog</a></p>
+	<p>Data from <a href="https://ergebnisse.zensus2022.de/datenbank/online">Zensus Datenbank</a></p>
 </div>
 <div id="map"></div>
 
