@@ -86,13 +86,13 @@
 		//Lab 9
 		function style1(feature){
 			d = feature.properties.pop_density;
-			answer = d > 30 ? '#6e016b':
-				d > 20 ? '#88419d' :
-				d > 15 ? '#8c6bb1' :
-				d > 10 ? '#8c96c6' :
-				d > 5 ? '#9ebcda' :
-				d > 3 ? '#bfd3e6' :
-				d > 1 ? '#e0ecf4' :
+			answer = d > 3000 ? '#6e016b':
+				d > 2000 ? '#88419d' :
+				d > 1500 ? '#8c6bb1' :
+				d > 1000 ? '#8c96c6' :
+				d > 500 ? '#9ebcda' :
+				d > 300 ? '#bfd3e6' :
+				d > 100 ? '#e0ecf4' :
 					'#f7fcfd';
 			
 			styleReturn = {
