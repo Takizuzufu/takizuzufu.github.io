@@ -5,7 +5,7 @@
 	<meta charset="utf8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
-	<title>Lab 8 - Denver Neighborhood Data</title>
+	<title>Lab 9 - Denver Neighborhood Data Choropleth</title>
 	
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -20,13 +20,13 @@
 		
 		#map { width:100%; height: 70%; }
 		
-		h1 { color: #3293a8;
+		h1 { color: #4d004b;
 		     font-family: "Garamond", serif;
 		     font-size: 20px;
 		    }
 		
 		p { font: serif 10px;
-		    color: #3293a8;
+		    color: #810f7c;
 		  }
 		
 		#header {
@@ -67,10 +67,35 @@
 
 		// the control let's the user turn on / off layers -- ##3 here
 		var layerControl = L.control.layers(baseMaps, null).addTo(map);
-
+		
+		//Lab 9
+		function style1(feature){
+			d = feature.properties.PCT_AGE65PLUS;
+			answer = d > 50 ? '#6e016b' :
+				d > 35 ? '#88419d' :
+				d > 25 ? '#8c6bb1' :
+				d > 15 ? '#8c96c6' :
+				d > 5 ? '#9ebcda' :
+				d > 1 ? '#bfd3e6' :
+					'#edf8fb';
+			
+			styleReturn = {
+				fillColor : answer,
+				weight : 1,
+				opacity : 1,
+				color : '#4d004b',
+				dashArray : '3',
+				fillOpacity : 0.7
+			};
+return styleReturn;
+}
 		// let's add the Denver ACS data -- ##4 here
 		$.getJSON('./tesr.geojson', function(data) {
-			acs_Den_2021_layer = L.geoJSON(data).addTo(map);
+			acs_Den_2021_layer = L.geoJSON(data, {style : style1,onEachFeature : function(feature, layer) {
+				layer.bindPopup("Percent of Population over the age of 65: " +
+						feature.properties.PCT_AGE65PLUS + "%");
+			}
+		}).addTo(map);
 			
 		// move map to data
 			map.panTo(acs_Den_2021_layer.getBounds().getCenter());
@@ -94,7 +119,7 @@
 
 
 <div id="header">
-	<h1><a href="https://www.census.gov/programs-surveys/acs">Denver 2021 American Community Survey (Census) data</a></h1>
+	<h1><a href="https://www.census.gov/programs-surveys/acs">Denver 2021 American Community Survey (Census) data: Percentage over the Age of 65</a></h1>
 	<p>Data from <a href="https://opendata-geospatialdenver.hub.arcgis.com/maps/619c7f836b6e4188b0e0f0458aecba26">Denver Open Data Catalog</a></p>
 </div>
 <div id="map"></div>
